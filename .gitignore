@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Project docs
+AGENT_BRIEF.md
+.claude/
