@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { services } from "@/Data/services"
+import { Link } from "react-router-dom"
 
 function ServicesApproach() {
   const [activeService, setActiveService] = useState(0)
@@ -21,9 +22,11 @@ return (
             <Button variant="white" size="lg">
               Book a Consultation <ArrowRight />
             </Button>
-            <Button variant="white-outline" size="lg">
-              View Services <ArrowRight />
-            </Button>
+            <Link to="/services">
+              <Button variant="white-outline" size="lg">
+                View Services <ArrowRight />
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="flex flex-col order-1 md:order-2">

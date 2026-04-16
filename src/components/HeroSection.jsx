@@ -17,9 +17,13 @@ function HeroSection(){
                   Software Development Studio Based in Kitchener-Waterloo
                 </h1>
               </div>
-              <div className="pt-48 text-left pl-24">
-                <h2 className="text-3xl">Built For Tomorrow</h2><br />
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, totam illum consequatur nesciunt atque aspernatur iure placeat quos id, impedit rem vero! Delectus labore, beatae ipsam unde distinctio sequi harum?</p>
+              <div className="pt-24 text-left pl-24">
+                <h2 className="text-7xl font-medium tracking-tight">Built For Tomorrow</h2>
+                <p className="text-white/60 text-lg mt-6 max-w-lg leading-relaxed">
+                  We help businesses move faster with custom software, automation,
+                  and strategy. No templates, no shortcuts — just real solutions
+                  built by developers who understand your goals.
+                </p>
               </div>
             </div>
 

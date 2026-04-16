@@ -14,7 +14,7 @@ function NavBar({agencyName}){
         {/* LOGO*/}
          <span className="text-xl font-bold tracking-tight">{agencyName}</span>
           <ul className="hidden md:flex items-center gap-8">
-          <li><a href="#services" className="text-zinc-400 hover:text-white transition-colors text-sm">Services</a></li>
+          <li><Link to="/services" className="text-zinc-400 hover:text-white transition-colors text-sm">Services</Link></li>
           <li><Link to="/case-study" className="text-zinc-400 hover:text-white transition-colors text-sm">Case Studies</Link></li>
           <li><a href="#contact" className="text-zinc-400 hover:text-white transition-colors text-sm">Contact</a></li>
         </ul>
@@ -33,7 +33,7 @@ function NavBar({agencyName}){
       {/* Mobile menu — only renders when isMenuOpen is true */}
       {isMenuOpen && (
         <div className="md:hidden border-t border-zinc-800 bg-zinc-950 px-6 py-4 flex flex-col gap-4">
-          <a href="#services" className="text-zinc-400 hover:text-white text-sm">Services</a>
+          <Link to="/services" className="text-zinc-400 hover:text-white text-sm">Services</Link>
           <a href="#work" className="text-zinc-400 hover:text-white text-sm">Case Studies</a>
           <a href="#contact" className="text-zinc-400 hover:text-white text-sm">Contact</a>
           <Button size="sm" className="w-full">Let's Talk</Button>

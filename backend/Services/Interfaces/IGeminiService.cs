@@ -1,6 +1,8 @@
+using Backend.Models;
+
   namespace Backend.Services.Interfaces;    
 
     public interface IGeminiService
   {
-      Task<string> ChatAsync(string message);
+      Task<ChatResponse> ChatAsync(string message, List<Message> messages);
   }

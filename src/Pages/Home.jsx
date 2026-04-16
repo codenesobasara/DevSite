@@ -7,7 +7,7 @@ import HeroSection from "@/components/HeroSection"
 function Home() {
   return (
     <div className="min-h-screen">
-      <NavBar agencyName="DevCo" />
+      <NavBar agencyName="Slate Studio" />
 
       <FadeSection>
       <HeroSection/>

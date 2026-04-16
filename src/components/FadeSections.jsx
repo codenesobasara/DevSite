@@ -9,8 +9,8 @@ function FadeSection({ children }) {
     offset: ["start start", "end start"]
   })
 
-  const opacity = useTransform(scrollYProgress, [0.1, 1], [1, 0])
-  const blur = useTransform(scrollYProgress, [0.2, 1], [0, 12])
+  const opacity = useTransform(scrollYProgress, [0.4, 1], [1, 0])
+  const blur = useTransform(scrollYProgress, [0.5, 1], [0, 12])
   const filter = useTransform(blur, (v) => `blur(${v}px)`)
 
   return (
