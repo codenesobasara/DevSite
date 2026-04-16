@@ -23,6 +23,17 @@ dist-ssr
 *.sln
 *.sw?
 
+# .NET build artifacts
+backend/bin/
+backend/obj/
+
+# Environment / secrets
+.env
+.env.*
+*.env
+appsettings.*.json
+!appsettings.json
+
 # Project docs
 AGENT_BRIEF.md
 .claude/
