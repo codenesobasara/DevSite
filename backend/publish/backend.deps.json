@@ -1,0 +1,251 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "backend/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.OpenApi": "10.0.3",
+          "Mscc.GenerativeAI": "3.1.0",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1"
+        },
+        "runtime": {
+          "backend.dll": {}
+        }
+      },
+      "Humanizer.Core/2.14.1": {
+        "runtime": {
+          "lib/net6.0/Humanizer.dll": {
+            "assemblyVersion": "2.14.0.0",
+            "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "Json.More.Net/2.1.1": {
+        "runtime": {
+          "lib/net9.0/Json.More.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.1.0"
+          }
+        }
+      },
+      "JsonPointer.Net/5.3.1": {
+        "dependencies": {
+          "Humanizer.Core": "2.14.1",
+          "Json.More.Net": "2.1.1"
+        },
+        "runtime": {
+          "lib/net9.0/JsonPointer.Net.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.3.1.0"
+          }
+        }
+      },
+      "JsonSchema.Net/7.3.4": {
+        "dependencies": {
+          "JsonPointer.Net": "5.3.1"
+        },
+        "runtime": {
+          "lib/net9.0/JsonSchema.Net.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.3.4.0"
+          }
+        }
+      },
+      "JsonSchema.Net.Generation/5.0.4": {
+        "dependencies": {
+          "Humanizer.Core": "2.14.1",
+          "JsonSchema.Net": "7.3.4"
+        },
+        "runtime": {
+          "lib/net9.0/JsonSchema.Net.Generation.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.4.0"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.OpenApi/10.0.3": {
+        "dependencies": {
+          "Microsoft.OpenApi": "2.0.0"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "assemblyVersion": "10.0.3.0",
+            "fileVersion": "10.0.326.7603"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore/10.0.5": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.5"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.EntityFrameworkCore.dll": {
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
+        "runtime": {
+          "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.5"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.EntityFrameworkCore.Relational.dll": {
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
+          }
+        }
+      },
+      "Microsoft.OpenApi/2.0.0": {
+        "runtime": {
+          "lib/net8.0/Microsoft.OpenApi.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "Mscc.GenerativeAI/3.1.0": {
+        "dependencies": {
+          "JsonSchema.Net.Generation": "5.0.4"
+        },
+        "runtime": {
+          "lib/net10.0/Mscc.GenerativeAI.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.1.0.0"
+          }
+        }
+      },
+      "Npgsql/10.0.2": {
+        "runtime": {
+          "lib/net10.0/Npgsql.dll": {
+            "assemblyVersion": "10.0.2.0",
+            "fileVersion": "10.0.2.0"
+          }
+        }
+      },
+      "Npgsql.EntityFrameworkCore.PostgreSQL/10.0.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "10.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.5",
+          "Npgsql": "10.0.2"
+        },
+        "runtime": {
+          "lib/net10.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
+            "assemblyVersion": "10.0.1.0",
+            "fileVersion": "10.0.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "backend/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Humanizer.Core/2.14.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
+      "path": "humanizer.core/2.14.1",
+      "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "Json.More.Net/2.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZXAKl2VsdnIZeUo1PFII3Oi1m1L4YQjEyDjygHfHln5vgsjgIo749X6xWkv7qFYp8RROES+vOEfDcvvoVgs8kA==",
+      "path": "json.more.net/2.1.1",
+      "hashPath": "json.more.net.2.1.1.nupkg.sha512"
+    },
+    "JsonPointer.Net/5.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3e2OJjU0OaE26XC/klgxbJuXvteFWTDJIJv0ITYWcJEoskq7jzUwPSC1s0iz4wPPQnfN7vwwFmg2gJfwRAPwgw==",
+      "path": "jsonpointer.net/5.3.1",
+      "hashPath": "jsonpointer.net.5.3.1.nupkg.sha512"
+    },
+    "JsonSchema.Net/7.3.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7GggWrdzKrtGWETRn3dcMnmuLSyWaDkBK94TK80LEHQEVz4bmsQc7FYO7qL40RDdZU2YPz5d98aT9lW5OYExuA==",
+      "path": "jsonschema.net/7.3.4",
+      "hashPath": "jsonschema.net.7.3.4.nupkg.sha512"
+    },
+    "JsonSchema.Net.Generation/5.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VNcQd95tHbpWRvKjRfWOjFXHRPKH+zMBEmrgQCavsDZYI3+zMjCyKXTtOScI2dMbYllgYbVu9aH7JHgluE1lpA==",
+      "path": "jsonschema.net.generation/5.0.4",
+      "hashPath": "jsonschema.net.generation.5.0.4.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.OpenApi/10.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SAvSrKDgnY5GDjDAngOXxPhUvEKlTU/0zIq8zidqHvh/xnZBPs0Vc4LqwyvnmnafNnyUaivtRABz4K4wodXfSg==",
+      "path": "microsoft.aspnetcore.openapi/10.0.3",
+      "hashPath": "microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore/10.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9tNBmK3EpYVGRQLiqP+bqK2m+TD0Gv//4vCzR7ZOgl4FWzCFyOpYdIVka13M4kcBdPdSJcs3wbHr3rmzOqbIMA==",
+      "path": "microsoft.entityframeworkcore/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.10.0.5.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-32c58Rnm47Qvhimawf67KO9PytgPz3QoWye7Abapt0Yocw/JnzMiSNj/pRoIKyn8Jxypkv86zxKD4Q/zNTc0Ag==",
+      "path": "microsoft.entityframeworkcore.abstractions/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uxmFjZEAB/KbsgWFSS4lLqkEHCfXxB2x0UcbiO4e5fCRpFFeTMSx/me6009nYJLu5IKlDwO1POh++P6RilFTDw==",
+      "path": "microsoft.entityframeworkcore.relational/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.relational.10.0.5.nupkg.sha512"
+    },
+    "Microsoft.OpenApi/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GGYLfzV/G/ct80OZ45JxnWP7NvMX1BCugn/lX7TH5o0lcVaviavsLMTxmFV2AybXWjbi3h6FF1vgZiTK6PXndw==",
+      "path": "microsoft.openapi/2.0.0",
+      "hashPath": "microsoft.openapi.2.0.0.nupkg.sha512"
+    },
+    "Mscc.GenerativeAI/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6fwCuE0rTSfX/BnyT+a06wpnec09/0+fQiEYfoqGdq1omMr5QEM8b4F5mGkTKOrbVmNDGfOynUDyz8UGBMvcLA==",
+      "path": "mscc.generativeai/3.1.0",
+      "hashPath": "mscc.generativeai.3.1.0.nupkg.sha512"
+    },
+    "Npgsql/10.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q5RfBI+wywJSFUNDE1L4ZbHEHCFTblo8Uf6A6oe4feOUFYiUQXyAf9GBh5qEZpvJaHiEbpBPkQumjEhXCJxdrg==",
+      "path": "npgsql/10.0.2",
+      "hashPath": "npgsql.10.0.2.nupkg.sha512"
+    },
+    "Npgsql.EntityFrameworkCore.PostgreSQL/10.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-P6EwH0Q4xkaA264iNZDqCPhWt8pscfUGxXazDQg4noBfqjoOlk4hKWfvBjF9ZX3R/9JybRmmJfmxr2iBMj0EpA==",
+      "path": "npgsql.entityframeworkcore.postgresql/10.0.1",
+      "hashPath": "npgsql.entityframeworkcore.postgresql.10.0.1.nupkg.sha512"
+    }
+  }
+}
