@@ -34,12 +34,12 @@ function TrustStatement(){
         </motion.p>
 
       </div>
-      <div className="block xl:hidden space-y-4 --phone-ls:space-y-2">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl --phone-ls:text-xl font-bold">
+      <div className="block xl:hidden space-y-4 phone-ls:space-y-2">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl phone-ls:text-xl font-bold">
           Software Solutions for Growing Businesses
         </h2>
 
-        <p className="text-sm sm:text-base --phone-ls:text-sm text-zinc-400 leading-relaxed">
+        <p className="text-sm sm:text-base phone-ls:text-sm text-zinc-400 leading-relaxed">
           We partner with businesses to find what's holding them back. A digital presence that isn't generating leads. Manual processes burning hours. Systems that don't connect. We identify the gaps — then build the software to close them. Custom applications, SEO-driven platforms, and AI-powered automation. Whatever moves the needle.
         </p>
       </div>

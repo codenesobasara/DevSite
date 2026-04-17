@@ -23,7 +23,7 @@ function ServicesApproach() {
             <div key={service.id} className="border-t border-white/10">
               <button
                 onClick={() => handleToggle(service.id)}
-                className={`flex justify-between items-center w-full py-4 --phone-ls:py-2 cursor-pointer transition-colors duration-200 ${
+                className={`flex justify-between items-center w-full py-4 phone-ls:py-2 cursor-pointer transition-colors duration-200 ${
                   activeService === service.id ? "text-white" : "text-white/40"
                 }`}
               >
@@ -42,8 +42,8 @@ function ServicesApproach() {
                     transition={{ duration: 0.25 }}
                     className="overflow-hidden"
                   >
-                    <div className="pb-5 --phone-ls:pb-3 space-y-4 --phone-ls:space-y-2">
-                      <p className="text-white/60 text-sm sm:text-base --phone-ls:text-xs leading-relaxed">
+                    <div className="pb-5 phone-ls:pb-3 space-y-4 phone-ls:space-y-2">
+                      <p className="text-white/60 text-sm sm:text-base phone-ls:text-xs leading-relaxed">
                         {service.description}
                       </p>
                       <div className="flex flex-col sm:flex-row gap-3">

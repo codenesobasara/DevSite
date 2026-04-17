@@ -37,8 +37,8 @@ function NavBar({agencyName}){
     }, [])
 
     return(
-  <nav ref={navRef} className="fixed top-4 --phone-ls:top-2 left-4 right-4 xl:top-6 xl:left-24 xl:right-24 z-50">
-  <div className="px-5 xl:px-24 h-14 --phone-ls:h-11 xl:h-15 flex items-center justify-between bg-[#1f1e1e] border-b border-zinc-900 backdrop-blur-sm rounded-2xl xl:rounded-none">
+  <nav ref={navRef} className="fixed top-4 phone-ls:top-2 left-4 right-4 xl:top-6 xl:left-24 xl:right-24 z-50">
+  <div className="px-5 xl:px-24 h-14 phone-ls:h-11 xl:h-15 flex items-center justify-between bg-[#1f1e1e] border-b border-zinc-900 backdrop-blur-sm rounded-2xl xl:rounded-none">
         {/* LOGO*/}
          <Link to="/" className="text-lg xl:text-xl font-bold tracking-tight">{agencyName}</Link>
           <ul className="hidden xl:flex items-center gap-8">

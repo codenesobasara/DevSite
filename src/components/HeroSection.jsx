@@ -64,11 +64,11 @@ function HeroSection({ mobileInsert }) {
   return (
     <>
       {/* ── Mobile / Tablet layout (up to xl) ── */}
-      <main className="block xl:hidden w-full px-4 pt-24 --phone-ls:pt-16 pb-8 --phone-ls:pb-4">
-        <div className="flex flex-col --phone-ls:flex-row --phone-ls:items-start gap-4 --phone-ls:gap-6">
+      <main className="block xl:hidden w-full px-4 pt-24 phone-ls:pt-16 pb-8 phone-ls:pb-4">
+        <div className="flex flex-col phone-ls:flex-row phone-ls:items-start gap-4 phone-ls:gap-6">
           {/* Hero heading */}
-          <div className="px-2 sm:px-4 --phone-ls:flex-1">
-            <h1 className="text-[8vw] sm:text-[6vw] md:text-[5vw] --phone-ls:text-[4vw] font-medium tracking-tight leading-[1.05] whitespace-pre-line">
+          <div className="px-2 sm:px-4 phone-ls:flex-1">
+            <h1 className="text-[8vw] sm:text-[6vw] md:text-[5vw] phone-ls:text-[4vw] font-medium tracking-tight leading-[1.05] whitespace-pre-line">
               {displayedText}
             </h1>
             {typingDone && (
@@ -76,7 +76,7 @@ function HeroSection({ mobileInsert }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
-                className="text-white/50 text-sm sm:text-base mt-4 --phone-ls:mt-2 max-w-md"
+                className="text-white/50 text-sm sm:text-base mt-4 phone-ls:mt-2 max-w-md"
               >
                 Custom software, web platforms, and AI integration for growing businesses.
               </motion.p>
@@ -89,9 +89,9 @@ function HeroSection({ mobileInsert }) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="px-2 sm:px-4 --phone-ls:flex-1"
+            className="px-2 sm:px-4 phone-ls:flex-1"
           >
-            <div className="flex items-center justify-between mb-5 --phone-ls:mb-3">
+            <div className="flex items-center justify-between mb-5 phone-ls:mb-3">
               <h2 className="text-lg sm:text-xl font-medium">Our Work</h2>
               <Link to="/case-study" className="text-white/40 text-xs hover:text-white transition-colors">
                 View All →
@@ -104,7 +104,7 @@ function HeroSection({ mobileInsert }) {
                   to={`/case-study/${study.slug}`}
                   className="group"
                 >
-                  <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 sm:p-5 md:p-4 aspect-square md:aspect-[4/3] --phone-ls:aspect-[4/3] flex flex-col justify-between transition-all duration-200 group-hover:border-white/25">
+                  <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 sm:p-5 md:p-4 aspect-square md:aspect-[4/3] phone-ls:aspect-[4/3] flex flex-col justify-between transition-all duration-200 group-hover:border-white/25">
                     <p className="text-white/40 text-[11px] sm:text-xs leading-snug">
                       {study.brief}
                     </p>

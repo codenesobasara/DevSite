@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant --phone-ls (@media (orientation: landscape) and (max-height: 500px));
+@custom-variant phone-ls (@media (orientation: landscape) and (max-height: 500px));
 
 @font-face {
   font-family: 'DM Sans';

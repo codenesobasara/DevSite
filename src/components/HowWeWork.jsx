@@ -34,19 +34,19 @@ const steps = [
 
 function HowWeWork() {
   return (
-    <section className="w-full px-4 xl:px-24 py-8 --phone-ls:py-4 xl:py-24">
+    <section className="w-full px-4 xl:px-24 py-8 phone-ls:py-4 xl:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl sm:text-4xl xl:text-5xl --phone-ls:text-2xl font-medium tracking-tight mb-4 --phone-ls:mb-2">How We Work</h2>
-        <p className="text-white/50 text-sm sm:text-base xl:text-lg --phone-ls:text-xs max-w-xl mb-8 --phone-ls:mb-4 xl:mb-16">
+        <h2 className="text-3xl sm:text-4xl xl:text-5xl phone-ls:text-2xl font-medium tracking-tight mb-4 phone-ls:mb-2">How We Work</h2>
+        <p className="text-white/50 text-sm sm:text-base xl:text-lg phone-ls:text-xs max-w-xl mb-8 phone-ls:mb-4 xl:mb-16">
           Four steps from first conversation to full ownership. No black boxes, no
           hand-waving.
         </p>
 
-        <div className="grid grid-cols-2 --phone-ls:grid-cols-4 xl:grid-cols-4 gap-4 xl:gap-8">
+        <div className="grid grid-cols-2 phone-ls:grid-cols-4 xl:grid-cols-4 gap-4 xl:gap-8">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
@@ -55,12 +55,12 @@ function HowWeWork() {
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className="relative"
             >
-              <div className="flex items-center gap-3 mb-3 --phone-ls:mb-1 xl:mb-4">
+              <div className="flex items-center gap-3 mb-3 phone-ls:mb-1 xl:mb-4">
                 <span className="text-white/20 text-xs xl:text-sm font-mono">{step.number}</span>
                 <step.icon className="size-4 xl:size-5 text-white/40" />
               </div>
-              <h3 className="text-base xl:text-xl --phone-ls:text-sm font-medium mb-2 --phone-ls:mb-1 xl:mb-3">{step.title}</h3>
-              <p className="text-white/50 text-xs xl:text-sm --phone-ls:text-[11px] leading-relaxed">
+              <h3 className="text-base xl:text-xl phone-ls:text-sm font-medium mb-2 phone-ls:mb-1 xl:mb-3">{step.title}</h3>
+              <p className="text-white/50 text-xs xl:text-sm phone-ls:text-[11px] leading-relaxed">
                 {step.description}
               </p>
             </motion.div>
