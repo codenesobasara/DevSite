@@ -4,5 +4,5 @@ using Backend.Models;
 
     public interface IGeminiService
   {
-      Task<ChatResponse> ChatAsync(string message, List<Message> messages);
+      Task<ChatResponse> ChatAsync(string message, List<Message> messages, string agentName);
   }

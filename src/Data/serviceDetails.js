@@ -4,19 +4,6 @@ export const serviceCategories = [
     name: "Web Development",
     tabs: [
       {
-        id: "web-apps",
-        title: "Web Application Development",
-        headline: "Full-stack applications built from the ground up.",
-        description:
-          "We build custom web applications that solve real business problems. Whether it's an internal tool, a customer-facing platform, or a complex SaaS product, we handle everything from database architecture to the interface your users interact with. No templates, no shortcuts.",
-        highlights: [
-          "Custom dashboards and admin panels",
-          "SaaS platforms and portals",
-          "Database design and API development",
-          "Authentication and role-based access",
-        ],
-      },
-      {
         id: "custom-websites",
         title: "Custom Website Development",
         headline: "Your business deserves more than a template.",
@@ -27,6 +14,19 @@ export const serviceCategories = [
           "Mobile responsive across all devices",
           "Performance optimized for speed",
           "Built to scale as your business grows",
+        ],
+      },
+      {
+        id: "web-apps",
+        title: "Web Application Development",
+        headline: "Full-stack applications built from the ground up.",
+        description:
+          "We build custom web applications that solve real business problems. Whether it's an internal tool, a customer-facing platform, or a complex SaaS product, we handle everything from database architecture to the interface your users interact with. No templates, no shortcuts.",
+        highlights: [
+          "Custom dashboards and admin panels",
+          "SaaS platforms and portals",
+          "Database design and API development",
+          "Authentication and role-based access",
         ],
       },
       {
@@ -109,3 +109,14 @@ export const serviceCategories = [
     ],
   },
 ];
+
+export function getServiceBySlug(slug) {
+  for (const category of serviceCategories) {
+    for (const tab of category.tabs) {
+      if (tab.id === slug) {
+        return { ...tab, category: category.name, categoryId: category.id }
+      }
+    }
+  }
+  return null
+}

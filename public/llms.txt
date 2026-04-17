@@ -1,0 +1,22 @@
+# Pontera Studios
+
+> Custom software development and web development studio based in the Waterloo Region, Ontario, Canada.
+
+## About
+
+Pontera Studios is a boutique software development agency. We build custom web applications, websites, iOS apps, and AI-powered automation for businesses. Every developer is local to Ontario with 10-15 years of experience. We never offshore.
+
+## Services
+
+- Custom Web Applications: Full-stack apps built from scratch with modern frameworks and relational databases.
+- Custom Website Development: Performance-optimized websites with headless CMS integration. No WordPress, no templates.
+- Landing Pages: Conversion-focused pages for campaigns and lead generation.
+- SEO & Web Optimization: Technical SEO audits, Core Web Vitals optimization, structured data implementation.
+- iOS Development: Native iOS apps from concept to App Store.
+- AI Integration & Automation: AI chatbots, internal knowledge search, API integrations, workflow automation.
+
+## Contact
+
+- Website: https://slatecode.dev
+- Contact: https://slatecode.dev/contact
+- Location: Waterloo Region, Ontario, Canada

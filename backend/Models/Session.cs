@@ -9,6 +9,7 @@ public class Session
     public string? LeadEmail { get; set; }
     public string? LeadCompany { get; set; }
     public string State { get; set; } = "greeting";
+    public string AgentName { get; set; } = "Lily";
 
     public List<Message> Messages { get; set; } = [];
     public List<Booking> Bookings { get; set; } = [];

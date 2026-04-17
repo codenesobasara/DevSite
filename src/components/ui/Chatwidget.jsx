@@ -1,25 +1,56 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { Card, CardHeader, CardAction, CardTitle, CardFooter, CardContent } from "./card";
 import { Button } from "./button";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { X, MessageCircle, Minus, Send } from "lucide-react";
+import { X, MessageCircle, Minus, Send, Loader2 } from "lucide-react";
 import { ChatService } from "@/Services/ChatService";
+import { useDrawer } from "@/Context/DrawerContext";
+
+const STORAGE_KEYS = {
+  sessionId: "devco_chat_sessionId",
+  messages: "devco_chat_messages",
+  hasUserReplied: "devco_chat_hasUserReplied",
+  hasDismissed: "devco_chat_hasDismissed",
+  hasInitFired: "devco_chat_hasInitFired",
+  nudgeCount: "devco_chat_nudgeCount",
+  pageTriggersFired: "devco_chat_pageTriggersFired",
+};
+
+function loadFromStorage(key, fallback) {
+  try {
+    const val = localStorage.getItem(key);
+    return val !== null ? JSON.parse(val) : fallback;
+  } catch {
+    return fallback;
+  }
+}
 
 export default function ChatWidget() {
+  const { isOpen: isModalOpen } = useDrawer();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [sessionId, setSessionId] = useState(null);
-  const [hasUserReplied, setHasUserReplied] = useState(false);
-  const [hasInitFired, setHasInitFired] = useState(false);
-  const [hasDismissed, setHasDismissed] = useState(false);
-  const [nudgeCount, setNudgeCount] = useState(0);
-  const [pageTriggersFired, setPageTriggersFired] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState(() => loadFromStorage(STORAGE_KEYS.messages, []));
+  const [sessionId, setSessionId] = useState(() => loadFromStorage(STORAGE_KEYS.sessionId, null));
+  const [hasUserReplied, setHasUserReplied] = useState(() => loadFromStorage(STORAGE_KEYS.hasUserReplied, false));
+  const [hasInitFired, setHasInitFired] = useState(() => loadFromStorage(STORAGE_KEYS.hasInitFired, false));
+  const [hasDismissed, setHasDismissed] = useState(() => loadFromStorage(STORAGE_KEYS.hasDismissed, false));
+  const [nudgeCount, setNudgeCount] = useState(() => loadFromStorage(STORAGE_KEYS.nudgeCount, 0));
+  const [pageTriggersFired, setPageTriggersFired] = useState(() => loadFromStorage(STORAGE_KEYS.pageTriggersFired, []));
   const messagesEndRef = useRef(null);
   const nudgeTimerRef = useRef(null);
   const location = useLocation();
+
+  // Persist state to localStorage
+  useEffect(() => { localStorage.setItem(STORAGE_KEYS.sessionId, JSON.stringify(sessionId)); }, [sessionId]);
+  useEffect(() => { localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(messages)); }, [messages]);
+  useEffect(() => { localStorage.setItem(STORAGE_KEYS.hasUserReplied, JSON.stringify(hasUserReplied)); }, [hasUserReplied]);
+  useEffect(() => { localStorage.setItem(STORAGE_KEYS.hasDismissed, JSON.stringify(hasDismissed)); }, [hasDismissed]);
+  useEffect(() => { localStorage.setItem(STORAGE_KEYS.hasInitFired, JSON.stringify(hasInitFired)); }, [hasInitFired]);
+  useEffect(() => { localStorage.setItem(STORAGE_KEYS.nudgeCount, JSON.stringify(nudgeCount)); }, [nudgeCount]);
+  useEffect(() => { localStorage.setItem(STORAGE_KEYS.pageTriggersFired, JSON.stringify(pageTriggersFired)); }, [pageTriggersFired]);
 
   // Auto-scroll when messages change
   useEffect(() => {
@@ -27,13 +58,17 @@ export default function ChatWidget() {
   }, [messages]);
 
   // Helper to send a trigger and handle the response
-  const sendTrigger = async (trigger) => {
-    if (hasDismissed) return;
-    const data = await ChatService(trigger, sessionId);
-    setSessionId(data.sessionId);
-    setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
-    if (!hasDismissed) setIsOpen(true);
-  };
+  const sendTrigger = useCallback(async (trigger) => {
+    if (hasDismissed || isModalOpen) return;
+    try {
+      const data = await ChatService(trigger, sessionId);
+      setSessionId(data.sessionId);
+      setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
+      if (!hasDismissed) setIsOpen(true);
+    } catch {
+      // Backend unavailable — silently skip trigger
+    }
+  }, [hasDismissed, isModalOpen, sessionId]);
 
   // Handle dismiss — respect the close
   const handleDismiss = () => {
@@ -43,7 +78,7 @@ export default function ChatWidget() {
     }
   };
 
-  // Initial trigger after 8 seconds
+  // Initial trigger after 8 seconds — only if never fired before
   useEffect(() => {
     if (hasInitFired || hasDismissed) return;
 
@@ -53,7 +88,7 @@ export default function ChatWidget() {
     }, 8000);
 
     return () => clearTimeout(timer);
-  }, [hasDismissed]);
+  }, [hasDismissed, hasInitFired, sendTrigger]);
 
   // Page-aware triggers — only fire if no conversation started and not dismissed
   useEffect(() => {
@@ -74,7 +109,7 @@ export default function ChatWidget() {
     }, 6000);
 
     return () => clearTimeout(timer);
-  }, [location.pathname, hasInitFired, hasUserReplied, hasDismissed, pageTriggersFired]);
+  }, [location.pathname, hasInitFired, hasUserReplied, hasDismissed, pageTriggersFired, sendTrigger]);
 
   // Nudge timer — first nudge after 30s, second after 3 min, then stop
   useEffect(() => {
@@ -96,20 +131,27 @@ export default function ChatWidget() {
     return () => {
       if (nudgeTimerRef.current) clearTimeout(nudgeTimerRef.current);
     };
-  }, [messages, hasUserReplied, nudgeCount, hasDismissed]);
+  }, [messages, hasUserReplied, nudgeCount, hasDismissed, hasInitFired, sendTrigger]);
 
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() || isLoading) return;
 
     const userMessage = message.trim();
     setMessage("");
     setHasUserReplied(true);
     setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+    setIsLoading(true);
 
-    const data = await ChatService(userMessage, sessionId);
-    setSessionId(data.sessionId);
-    setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
+    try {
+      const data = await ChatService(userMessage, sessionId);
+      setSessionId(data.sessionId);
+      setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
+    } catch {
+      setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I'm having trouble connecting right now. Try again in a moment!" }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -168,6 +210,13 @@ export default function ChatWidget() {
                   </div>
                 </div>
               ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-white/5 text-zinc-400 p-3 rounded-2xl rounded-tl-none text-sm">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </CardContent>
 
@@ -179,7 +228,7 @@ export default function ChatWidget() {
                   onChange={(e) => setMessage(e.target.value)}
                   className="bg-white/5 border-none text-white placeholder:text-zinc-500 focus-visible:ring-1 focus-visible:ring-primary"
                 />
-                <Button type="submit" size="icon" disabled={!message.trim()}>
+                <Button type="submit" size="icon" disabled={!message.trim() || isLoading}>
                   <Send className="h-4 w-4" />
                 </Button>
               </form>

@@ -17,15 +17,18 @@ public class GeminiService : IGeminiService
         _apiKey = Configuration["GeminiApiKey"];
     }
 
-    public async Task<ChatResponse> ChatAsync(string message, List<Backend.Models.Message> messages)
+    public async Task<ChatResponse> ChatAsync(string message, List<Backend.Models.Message> messages, string agentName)
     {
         Console.WriteLine($"[Gemini] Starting ChatAsync with message: {message}");
         Console.WriteLine($"[Gemini] API Key present: {!string.IsNullOrEmpty(_apiKey)}, length: {_apiKey?.Length}");
 
+        var systemPrompt = SystemPrompts.Slate.Replace("[name]", agentName)
+            + $"\n\nYour name is {agentName}. Use this name for the entire conversation. Do not use any other name.";
+
         var googleAi = new GoogleAI(_apiKey);
         var model = googleAi.GenerativeModel(
             model: "gemini-2.5-flash",
-            systemInstruction: new Mscc.GenerativeAI.Types.Content(SystemPrompts.Slate)
+            systemInstruction: new Mscc.GenerativeAI.Types.Content(systemPrompt)
         );
 
         var history = new List<ContentResponse>();
