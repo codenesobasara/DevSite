@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import ContactDrawer from './components/ContactDrawer'
 import ChatWidget from './components/ui/Chatwidget'
 
-const Home = lazy(() => import('./pages/Home'))
+const Home = lazy(() => import('./Pages/Home'))
 const CaseStudies = lazy(() => import('./Pages/CaseStudies'))
 const CaseStudyFocusPoint = lazy(() => import('./Pages/CaseStudyFocusPoint'))
 const CaseStudyBasara = lazy(() => import('./Pages/CaseStudyBasara'))
