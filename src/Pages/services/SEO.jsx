@@ -25,6 +25,11 @@ function SEOReportModal({ isOpen, onClose }) {
     setStatus("sending")
 
     try {
+      let website = form.website.trim()
+      if (website && !/^https?:\/\//i.test(website)) {
+        website = "https://" + website
+      }
+
       const res = await fetch("https://api.ponterastudios.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,8 +37,8 @@ function SEOReportModal({ isOpen, onClose }) {
           name: form.name,
           email: form.email,
           company: form.company || null,
-          service: `Free SEO Report — ${form.website}`,
-          message: form.message || `Requesting free SEO report for ${form.website}`,
+          service: `Free SEO Report — ${website}`,
+          message: form.message || `Requesting free SEO report for ${website}`,
         }),
       })
 
@@ -139,11 +144,11 @@ function SEOReportModal({ isOpen, onClose }) {
                     <Input
                       id="seo-website"
                       name="website"
-                      type="url"
+                      type="text"
                       required
                       value={form.website}
                       onChange={handleChange}
-                      placeholder="https://yoursite.com"
+                      placeholder="yoursite.com"
                       className="bg-white/5 border-white/10 text-white placeholder:text-white/30 h-10"
                     />
                   </div>
