@@ -37,7 +37,7 @@ function SEOReportModal({ isOpen, onClose }) {
           name: form.name,
           email: form.email,
           company: form.company || null,
-          service: `Free SEO Report — ${website}`,
+          service: `Free SEO Report - ${website}`,
           message: form.message || `Requesting free SEO report for ${website}`,
         }),
       })

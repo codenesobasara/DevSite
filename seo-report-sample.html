@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Audit Report - basara.ca</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1a1a2e;
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        /* Cover / Hero */
+        .cover {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #fff;
+            padding: 70px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #fff;
+        }
+
+        .report-badge {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 4px;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-content h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .cover-content .client-url {
+            font-size: 16px;
+            color: #60a5fa;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .cover-content .cover-date {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 20px;
+        }
+
+        /* Score Strip */
+        .score-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .score-item {
+            padding: 28px 24px;
+            text-align: center;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .score-item:last-child {
+            border-right: none;
+        }
+
+        .score-number {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .score-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #64748b;
+        }
+
+        .green { color: #059669; }
+        .yellow { color: #d97706; }
+        .red { color: #dc2626; }
+        .blue { color: #2563eb; }
+
+        /* Main Content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 60px;
+        }
+
+        /* Section Intro */
+        .section-intro {
+            margin-bottom: 50px;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+            border-radius: 10px;
+            border: 1px solid #dbeafe;
+        }
+
+        .section-intro h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e40af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-intro p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+        }
+
+        .section-header .section-sub {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* Issue Cards */
+        .issue-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 16px;
+            transition: box-shadow 0.2s;
+        }
+
+        .issue-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .issue-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .issue-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .severity {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .severity-high {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .severity-medium {
+            background: #fffbeb;
+            color: #b45309;
+        }
+
+        .severity-low {
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .severity-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .severity-high .severity-dot { background: #dc2626; }
+        .severity-medium .severity-dot { background: #f59e0b; }
+        .severity-low .severity-dot { background: #22c55e; }
+
+        .issue-card-body {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .issue-card-impact {
+            font-size: 12px;
+            color: #1e40af;
+            font-weight: 600;
+            background: #eff6ff;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .issue-card-fix {
+            font-size: 13px;
+            color: #334155;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .issue-card-fix strong {
+            color: #1e40af;
+        }
+
+        .issue-card-count {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        /* Passing Section */
+        .pass-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .pass-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 16px 18px;
+            background: #f8fdf9;
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+        }
+
+        .pass-check {
+            width: 20px;
+            height: 20px;
+            background: #059669;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .pass-check svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .pass-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .pass-text span {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        /* Performance Table */
+        .perf-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .perf-table thead {
+            background: #f1f5f9;
+        }
+
+        .perf-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #334155;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .perf-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        .perf-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .speed-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .speed-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .speed-good { background: #10b981; }
+        .speed-slow { background: #f59e0b; }
+        .speed-bad { background: #ef4444; }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 50px 0;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: #0f172a;
+            color: #fff;
+            border-radius: 12px;
+            padding: 36px 36px;
+            margin-top: 50px;
+        }
+
+        .quote-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .quote-section .quote-sub {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .quote-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .quote-line:last-of-type {
+            border-bottom: none;
+        }
+
+        .quote-line .item {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .quote-line .price {
+            font-weight: 700;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .quote-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0 0;
+            margin-top: 14px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .quote-total .item {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .quote-total .price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #60a5fa;
+        }
+
+        .quote-note {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .footer-contact {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* CTA */
+        .cta-bar {
+            text-align: center;
+            margin-top: 30px;
+            padding: 24px;
+            background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 100%);
+            border-radius: 10px;
+            border: 1px solid #dbeafe;
+        }
+
+        .cta-bar p {
+            font-size: 14px;
+            color: #334155;
+        }
+
+        .cta-bar strong {
+            color: #1e40af;
+        }
+
+        /* Page break for PDF */
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover -->
+    <div class="cover">
+        <div class="cover-header">
+            <div class="brand">Pontera Studios</div>
+            <div class="report-badge">Site Audit Report</div>
+        </div>
+        <div class="cover-content">
+            <h1>Website Health &<br>SEO Performance Audit</h1>
+            <div class="client-url">www.basara.ca</div>
+            <div class="cover-date">Report generated April 20, 2026</div>
+        </div>
+    </div>
+
+    <!-- Score Strip -->
+    <div class="score-strip">
+        <div class="score-item">
+            <div class="score-number blue">75</div>
+            <div class="score-label">Pages Analyzed</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number green">0</div>
+            <div class="score-label">Broken Links</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number yellow">193</div>
+            <div class="score-label">Warnings</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number green">0</div>
+            <div class="score-label">Critical Errors</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- Intro -->
+        <div class="section-intro">
+            <h3>What This Report Covers</h3>
+            <p>We crawled your entire website and analyzed every page for technical SEO issues, accessibility compliance, security headers, page speed, and content structure. Each issue below is ranked by its impact on your Google search rankings and user experience. Higher-priority issues have the largest effect on your visibility in search results.</p>
+        </div>
+
+        <!-- HIGH PRIORITY ISSUES -->
+        <div class="section">
+            <div class="section-header">
+                <h2>High Priority Issues</h2>
+                <div class="section-sub">These issues are actively reducing your search rankings and should be addressed first.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Accessibility Labels (ARIA)</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Accessibility is a confirmed Google ranking signal</div>
+                <div class="issue-card-body">
+                    185 interactive elements on your site (buttons, links, form fields) are missing ARIA labels. These labels tell search engines and screen readers what each element does. Google uses accessibility as a ranking factor — sites that score poorly here get ranked lower than accessible competitors. This also means visually impaired users cannot navigate your site, which limits your potential audience.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add descriptive aria-label attributes to all interactive elements. This involves updating your component templates to include labels like "Navigate to Kitchener market report" instead of unlabelled links.
+                </div>
+                <div class="issue-card-count">185 elements across 75 pages</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">No Brotli Compression Enabled</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Page speed is a Core Web Vitals factor</div>
+                <div class="issue-card-body">
+                    None of your pages are served with Brotli compression — a modern compression algorithm that reduces page size by 15-25% over standard gzip. Google's Core Web Vitals directly measure how fast your pages load. Without compression, your pages transfer more data than necessary, increasing load times on mobile and slower connections. Since 2021, Google uses page speed as a direct ranking factor.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Enable Brotli compression at the hosting/CDN level. Your site runs on Vercel, which supports Brotli — it may need to be explicitly enabled in your configuration.
+                </div>
+                <div class="issue-card-count">All 75 pages affected</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing ARIA Roles on Key Elements</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Helps Google understand your page structure</div>
+                <div class="issue-card-body">
+                    8 structural elements are missing role attributes (navigation, main, banner, etc.). These roles create a semantic map of your page that Google uses to understand content hierarchy. Without them, search engines have to guess which part of your page is the main content vs. navigation vs. footer — reducing their confidence in ranking your content for relevant queries.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add role="navigation", role="main", role="banner", and role="contentinfo" to the appropriate landmark elements in your layout.
+                </div>
+                <div class="issue-card-count">8 elements</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- MEDIUM PRIORITY -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Medium Priority Recommendations</h2>
+                <div class="section-sub">These won't tank your rankings alone, but fixing them gives you an edge over competitors.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Images Not Served in Modern Formats</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Affects Largest Contentful Paint (LCP) score</div>
+                <div class="issue-card-body">
+                    Your images are served as traditional JPEG/PNG. Modern formats like WebP and AVIF deliver the same visual quality at 25-50% smaller file sizes. Google's Largest Contentful Paint metric — one of three Core Web Vitals �� directly measures how fast your biggest visual element loads. Smaller images = faster LCP = better ranking position.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Convert images to WebP format and serve them with proper fallbacks. If using Next.js Image component, this may already be partially handled — needs verification.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">47 Unnecessary Redirects</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Wastes crawl budget and adds latency</div>
+                <div class="issue-card-body">
+                    Every page on basara.ca (non-www) redirects to www.basara.ca via a 307 redirect. This means Google has to follow two hops to reach your content — wasting "crawl budget" (the number of pages Google will crawl in a session). It also adds ~30-50ms of latency per page for real visitors. For a 75-page site this is manageable, but it's unnecessary overhead.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Ensure all internal links point directly to www.basara.ca. Update canonical tags, sitemap, and any external profiles to use the www version.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Server Technology Disclosed</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: None directly — this is a security best practice</div>
+                <div class="issue-card-body">
+                    Your server responds with a "Server: Vercel" header on every request. While this doesn't affect SEO directly, it tells potential attackers exactly what platform you're on, making it easier to target known vulnerabilities. It's a quick hardening step.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add a custom header configuration to suppress or override the Server header in your Vercel deployment settings.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- WHAT'S WORKING -->
+        <div class="section">
+            <div class="section-header">
+                <h2>What's Working Well</h2>
+                <div class="section-sub">These fundamentals are solid — your site has a strong technical foundation.</div>
+            </div>
+
+            <div class="pass-grid">
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Zero Broken Links
+                        <span>No dead pages — every link resolves</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Unique Title Tags
+                        <span>All 75 pages have distinct titles</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Meta Descriptions Set
+                        <span>Every page has a unique description</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Proper Heading Hierarchy
+                        <span>H1 → H2 → H3 structure correct</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Full Security Headers
+                        <span>HSTS, CSP, XSS protection all set</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Valid SSL Certificate
+                        <span>HTTPS properly configured</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Clean DOM Structure
+                        <span>No excessive nesting slowing renders</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        All Pages Indexable
+                        <span>No accidental noindex tags found</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PERFORMANCE -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Page Speed Analysis</h2>
+                <div class="section-sub">Server response times measured during crawl. Google recommends under 200ms for server response (TTFB).</div>
+            </div>
+
+            <table class="perf-table">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>Response Time</th>
+                        <th>Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>/</strong> (Homepage)</td>
+                        <td>665ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-slow"></span> Needs improvement</span></td>
+                    </tr>
+                    <tr>
+                        <td>/waterloo/news/...state-of-the-city</td>
+                        <td>727ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-slow"></span> Needs improvement</span></td>
+                    </tr>
+                    <tr>
+                        <td>/north-dumfries/news</td>
+                        <td>445ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-slow"></span> Needs improvement</span></td>
+                    </tr>
+                    <tr>
+                        <td>/woolwich/news</td>
+                        <td>405ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-slow"></span> Needs improvement</span></td>
+                    </tr>
+                    <tr>
+                        <td>/kitchener</td>
+                        <td>170ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-good"></span> Good</span></td>
+                    </tr>
+                    <tr>
+                        <td>/cambridge</td>
+                        <td>141ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-good"></span> Good</span></td>
+                    </tr>
+                    <tr>
+                        <td>News articles (avg)</td>
+                        <td>~170ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-good"></span> Good</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Quote -->
+        <div class="quote-section">
+            <h2>Recommended Fixes — Estimate</h2>
+            <div class="quote-sub">One-time remediation to resolve all issues identified in this audit.</div>
+
+            <div class="quote-line">
+                <span class="item">Accessibility remediation (ARIA labels + roles)</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Brotli compression configuration</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Image optimization (WebP/AVIF pipeline)</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Redirect cleanup &amp; canonical consolidation</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Server header hardening</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Homepage speed optimization</span>
+                <span class="price">$———</span>
+            </div>
+
+            <div class="quote-total">
+                <span class="item">Total</span>
+                <span class="price">$———</span>
+            </div>
+
+            <div class="quote-note">
+                All fixes are one-time implementations. Ongoing monitoring and maintenance available as a separate retainer. Reply to this email or book a call to discuss.
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-bar">
+            <p>Questions about this report? Reply directly to this email or reach out at <strong>hello@ponterastudios.com</strong></p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-brand">Pontera Studios</div>
+            <div class="footer-contact">hello@ponterastudios.com</div>
+        </div>
+    </div>
+
+</body>
+</html>

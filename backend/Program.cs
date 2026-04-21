@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IGeminiService, GeminiService>();
 builder.Services.AddHttpClient<IHubSpotService, HubSpotService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -79,7 +80,7 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.MapPost("/api/chat", async (ChatRequest request, IGeminiService gemini, AppDbContext db, IHubSpotService hubspot) =>
+app.MapPost("/api/chat", async (ChatRequest request, IGeminiService gemini, AppDbContext db, IHubSpotService hubspot, IEmailService emailService) =>
 {
     try
     {
@@ -152,6 +153,25 @@ app.MapPost("/api/chat", async (ChatRequest request, IGeminiService gemini, AppD
                     noteText
                 );
                 Console.WriteLine($"[HubSpot] Pushed chat lead: {session.LeadEmail}");
+
+                // Send notification email
+                _ = Task.Run(async () =>
+                {
+                    try
+                    {
+                        await emailService.SendChatLeadNotificationAsync(
+                            session.LeadName!,
+                            session.LeadEmail!,
+                            session.LeadCompany,
+                            chatResponse.ExtractedData.Needs,
+                            chatResponse.ExtractedData.ServiceMatch);
+                        Console.WriteLine($"[Email] Chat lead notification sent for {session.LeadEmail}");
+                    }
+                    catch (Exception emailEx)
+                    {
+                        Console.WriteLine($"[Email] Failed to send chat notification: {emailEx.Message}");
+                    }
+                });
             }
             catch (Exception hubEx)
             {
@@ -193,7 +213,7 @@ app.MapPost("/api/chat", async (ChatRequest request, IGeminiService gemini, AppD
     }
 }).RequireRateLimiting("chat");
 
-app.MapPost("/api/contact", async (ContactRequest request, IHubSpotService hubspot) =>
+app.MapPost("/api/contact", async (ContactRequest request, IHubSpotService hubspot, IEmailService emailService) =>
 {
     if (string.IsNullOrWhiteSpace(request.Name) ||
         string.IsNullOrWhiteSpace(request.Email) ||
@@ -217,6 +237,41 @@ app.MapPost("/api/contact", async (ContactRequest request, IHubSpotService hubsp
             request.Service,
             request.Message
         );
+
+        // Send emails (fire-and-forget — don't block the response)
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var isSeoRequest = request.Service?.StartsWith("Free SEO Report", StringComparison.OrdinalIgnoreCase) == true;
+
+                if (isSeoRequest)
+                {
+                    // Extract website URL from service field: "Free SEO Report — https://example.com"
+                    var website = request.Service!.StartsWith("Free SEO Report - ")
+                        ? request.Service.Substring("Free SEO Report - ".Length).Trim()
+                        : request.Message;
+
+                    await emailService.SendSeoRequestNotificationAsync(
+                        request.Name, request.Email, request.Company, website, request.Message);
+                    await emailService.SendSeoAutoReplyAsync(
+                        request.Name, request.Email, website);
+                    Console.WriteLine($"[Email] SEO request emails sent for {request.Email}");
+                }
+                else
+                {
+                    await emailService.SendContactNotificationAsync(
+                        request.Name, request.Email, request.Company, request.Service!, request.Message);
+                    await emailService.SendContactAutoReplyAsync(
+                        request.Name, request.Email);
+                    Console.WriteLine($"[Email] Contact emails sent for {request.Email}");
+                }
+            }
+            catch (Exception emailEx)
+            {
+                Console.WriteLine($"[Email] Failed to send: {emailEx.Message}");
+            }
+        });
 
         return Results.Ok(new { success = true });
     }

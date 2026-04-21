@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Audit Report - truenorthforming.ca</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1a1a2e;
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #fff;
+            padding: 70px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #fff;
+        }
+
+        .report-badge {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 4px;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-content h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .cover-content .client-url {
+            font-size: 16px;
+            color: #60a5fa;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .cover-content .cover-date {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 20px;
+        }
+
+        .score-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .score-item {
+            padding: 28px 24px;
+            text-align: center;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .score-item:last-child {
+            border-right: none;
+        }
+
+        .score-number {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .score-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #64748b;
+        }
+
+        .green { color: #059669; }
+        .yellow { color: #d97706; }
+        .red { color: #dc2626; }
+        .blue { color: #2563eb; }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 60px;
+        }
+
+        .section-intro {
+            margin-bottom: 50px;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+            border-radius: 10px;
+            border: 1px solid #dbeafe;
+        }
+
+        .section-intro h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e40af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-intro p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+        }
+
+        .section-header .section-sub {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .issue-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 16px;
+        }
+
+        .issue-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .issue-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .severity {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .severity-high {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .severity-medium {
+            background: #fffbeb;
+            color: #b45309;
+        }
+
+        .severity-low {
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .severity-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .severity-high .severity-dot { background: #dc2626; }
+        .severity-medium .severity-dot { background: #f59e0b; }
+        .severity-low .severity-dot { background: #22c55e; }
+
+        .issue-card-body {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .issue-card-impact {
+            font-size: 12px;
+            color: #1e40af;
+            font-weight: 600;
+            background: #eff6ff;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .issue-card-fix {
+            font-size: 13px;
+            color: #334155;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .issue-card-fix strong {
+            color: #1e40af;
+        }
+
+        .issue-card-count {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        .pass-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .pass-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 16px 18px;
+            background: #f8fdf9;
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+        }
+
+        .pass-check {
+            width: 20px;
+            height: 20px;
+            background: #059669;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .pass-check svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .pass-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .pass-text span {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .perf-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .perf-table thead {
+            background: #f1f5f9;
+        }
+
+        .perf-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #334155;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .perf-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        .perf-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .speed-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .speed-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .speed-good { background: #10b981; }
+        .speed-slow { background: #f59e0b; }
+        .speed-bad { background: #ef4444; }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 50px 0;
+        }
+
+        .quote-section {
+            background: #0f172a;
+            color: #fff;
+            border-radius: 12px;
+            padding: 36px 36px;
+            margin-top: 50px;
+        }
+
+        .quote-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .quote-section .quote-sub {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .quote-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .quote-line:last-of-type {
+            border-bottom: none;
+        }
+
+        .quote-line .item {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .quote-line .price {
+            font-weight: 700;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .quote-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0 0;
+            margin-top: 14px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .quote-total .item {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .quote-total .price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #60a5fa;
+        }
+
+        .quote-note {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .footer-contact {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .cta-bar {
+            text-align: center;
+            margin-top: 30px;
+            padding: 24px;
+            background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 100%);
+            border-radius: 10px;
+            border: 1px solid #dbeafe;
+        }
+
+        .cta-bar p {
+            font-size: 14px;
+            color: #334155;
+        }
+
+        .cta-bar strong {
+            color: #1e40af;
+        }
+
+        .platform-note {
+            margin-top: 16px;
+            padding: 16px 20px;
+            background: #fefce8;
+            border: 1px solid #fde047;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #713f12;
+            line-height: 1.6;
+        }
+
+        .platform-note strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover -->
+    <div class="cover">
+        <div class="cover-header">
+            <div class="brand">Pontera Studios</div>
+            <div class="report-badge">Site Audit Report</div>
+        </div>
+        <div class="cover-content">
+            <h1>Website Health &<br>SEO Performance Audit</h1>
+            <div class="client-url">www.truenorthforming.ca</div>
+            <div class="cover-date">Report generated April 20, 2026</div>
+        </div>
+    </div>
+
+    <!-- Score Strip -->
+    <div class="score-strip">
+        <div class="score-item">
+            <div class="score-number blue">17</div>
+            <div class="score-label">Pages Analyzed</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number green">0</div>
+            <div class="score-label">Broken Links</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number yellow">80</div>
+            <div class="score-label">Warnings</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number red">17</div>
+            <div class="score-label">Critical Errors</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- Intro -->
+        <div class="section-intro">
+            <h3>What This Report Covers</h3>
+            <p>We crawled your entire website and analyzed every page for technical SEO issues, accessibility compliance, security headers, page speed, and content structure. Each issue below is ranked by its impact on your Google search rankings and user experience. Higher-priority issues have the largest effect on your visibility in search results.</p>
+        </div>
+
+        <!-- CRITICAL ISSUES -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Critical Issues</h2>
+                <div class="section-sub">These are actively harming your search rankings and must be addressed immediately.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Content Security Policy (CSP)</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Google flags insecure sites and may show browser warnings</div>
+                <div class="issue-card-body">
+                    None of your 17 pages have a Content-Security-Policy header. CSP is a critical security layer that prevents cross-site scripting (XSS) attacks — one of the most common ways websites get hacked. Without it, malicious code could be injected into your pages. Google increasingly factors site security into rankings, and browsers may display security warnings to visitors, driving them away before they ever see your content.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Implement a Content-Security-Policy header that restricts which scripts, styles, and resources can load on your pages. This needs to be configured at the hosting/platform level.
+                </div>
+                <div class="issue-card-count">All 17 pages affected</div>
+                <div class="platform-note">
+                    <strong>Platform limitation:</strong> Your site is built on Wix. Wix does not currently allow custom security headers like CSP. This fix would require migrating to a platform that gives you server-level control (e.g., Vercel, Netlify, or a custom host).
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">TLSv1.2 Protocol Not Supported</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Google requires HTTPS — incomplete TLS support breaks compatibility</div>
+                <div class="issue-card-body">
+                    Your server only supports TLSv1.3 and does not offer TLSv1.2 as a fallback. While TLSv1.3 is newer, many corporate networks, older devices, and some search engine crawlers still use TLSv1.2. Without it, these visitors and bots may fail to connect to your site entirely — meaning Google may not be able to crawl certain pages, and a portion of your potential customers literally cannot access your site.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Enable TLSv1.2 support alongside TLSv1.3. This is configured at the hosting/server level and requires no code changes.
+                </div>
+                <div class="platform-note">
+                    <strong>Platform limitation:</strong> This is controlled by Wix's infrastructure. You cannot change TLS settings on Wix. Contact Wix support or consider migration.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Blog Page Missing H1 Heading</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: H1 is the #1 on-page SEO signal for page topic</div>
+                <div class="issue-card-body">
+                    Your /blog page has no H1 heading tag. The H1 tells Google what the page is about — it's the single most important on-page SEO element. Without it, Google has to guess your page's topic from other signals, which means it will rank lower for your target keywords. Think of it as a book chapter with no title — search engines simply don't know what to file it under.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add a clear, keyword-rich H1 heading to the blog page (e.g., "Concrete Forming Tips & Industry News"). This can be done in the Wix editor.
+                </div>
+                <div class="issue-card-count">1 page — /blog</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- HIGH PRIORITY -->
+        <div class="section">
+            <div class="section-header">
+                <h2>High Priority Issues</h2>
+                <div class="section-sub">These issues significantly reduce your ranking potential and should be fixed soon.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Security Headers</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Insecure sites get ranked below secure competitors</div>
+                <div class="issue-card-body">
+                    Your site is missing several important security headers: X-Frame-Options (prevents clickjacking), Referrer-Policy (controls data leakage), and Permissions-Policy (restricts browser features). Together, these leave your site vulnerable to common attacks. Google's ranking algorithm considers site security — missing protections mean your competitors with proper security will outrank you for the same keywords.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add X-Frame-Options: SAMEORIGIN, Referrer-Policy: strict-origin-when-cross-origin, and Permissions-Policy headers to all responses.
+                </div>
+                <div class="issue-card-count">All 17 pages missing these headers</div>
+                <div class="platform-note">
+                    <strong>Platform limitation:</strong> Wix does not expose custom response header configuration. This requires platform migration to resolve fully.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Accessibility Labels (ARIA)</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Accessibility is a confirmed Google ranking signal</div>
+                <div class="issue-card-body">
+                    17 pages are missing ARIA labels on interactive elements, and 3 pages have critically inaccessible elements. ARIA labels tell search engines and screen readers what buttons, links, and form fields do. Google uses accessibility signals in ranking — sites that score poorly here lose position to accessible competitors. This also means users with disabilities cannot use your site, limiting your audience.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add aria-label attributes to all buttons, navigation links, and interactive elements. In Wix, check that all buttons and links have descriptive text or labels set in the accessibility panel.
+                </div>
+                <div class="issue-card-count">17 pages with warnings, 3 pages critical</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">No Brotli Compression</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Page speed is a Core Web Vitals factor</div>
+                <div class="issue-card-body">
+                    None of your pages are served with Brotli compression. Brotli reduces page size by 15-25% over standard gzip, directly improving load times. Since 2021, Google uses Core Web Vitals (including page speed) as a direct ranking factor. Without compression, your pages transfer more data than necessary — every extra millisecond of load time costs you both rankings and conversions.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Enable Brotli compression at the server/CDN level.
+                </div>
+                <div class="issue-card-count">All 17 pages affected</div>
+                <div class="platform-note">
+                    <strong>Platform limitation:</strong> Wix controls compression settings. This cannot be changed without platform migration.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Excessive DOM Depth (30+ Levels)</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Deep DOM trees slow rendering and hurt Core Web Vitals</div>
+                <div class="issue-card-body">
+                    9 of your 17 pages have DOM trees deeper than 30 levels. This means your page's HTML structure is excessively nested — like folders inside folders inside folders. Deep DOM trees make the browser work harder to render the page, slowing down paint times and interaction responsiveness. Google measures this through Interaction to Next Paint (INP), and deeply nested pages score poorly.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Flatten the HTML structure by reducing unnecessary wrapper elements. On Wix, this is largely controlled by the platform's output — simplifying your layout sections and reducing nested containers helps.
+                </div>
+                <div class="issue-card-count">9 out of 17 pages</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- MEDIUM PRIORITY -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Medium Priority Recommendations</h2>
+                <div class="section-sub">These won't tank your rankings alone, but fixing them gives you an edge over competitors.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Image Alt Text</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Alt text is how Google "sees" your images</div>
+                <div class="issue-card-body">
+                    5 pages have images without alt attributes. Alt text describes what an image shows — without it, Google cannot index your images for Google Image Search (a significant traffic source for construction companies), and visually impaired visitors have no idea what's in the image. Every image without alt text is a missed keyword opportunity.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add descriptive alt text to every image (e.g., "Residential concrete foundation pour in Kitchener Ontario" instead of "IMG_2847"). Do this in the Wix media manager.
+                </div>
+                <div class="issue-card-count">5 pages</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Skipped Heading Levels</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Broken hierarchy confuses Google's content parsing</div>
+                <div class="issue-card-body">
+                    3 pages jump from H1 directly to H3, or start with H2 instead of H1. Heading hierarchy (H1 → H2 → H3) creates a content outline that Google reads to understand your page structure. Skipping levels is like writing a book outline that jumps from Chapter 1 to Section 1.3 — it confuses the reader about what's important and what's a subtopic.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Restructure headings so they follow proper order. The /blog page needs an H1, and footer sections should use H4/H5 or styled paragraphs instead of H3 tags.
+                </div>
+                <div class="issue-card-count">3 pages — /blog, /privacy-policy, +1</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Images Not Served in Modern Formats</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Affects Largest Contentful Paint (LCP) score</div>
+                <div class="issue-card-body">
+                    No WebP or AVIF images detected. These modern formats deliver the same visual quality at 25-50% smaller file sizes than JPEG/PNG. Google's Largest Contentful Paint metric — one of three Core Web Vitals — measures how fast your biggest visual element loads. For a construction company site with project photos, this can be a major speed improvement.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Convert images to WebP format before uploading. Wix has some automatic format conversion built in, but verify it's active in your site settings under "Performance."
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Duplicate Empty Meta Descriptions</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Missing descriptions reduce click-through rates from search results</div>
+                <div class="issue-card-body">
+                    2 pages have empty meta descriptions (11% of your site). The meta description is the text snippet shown below your link in Google search results. When it's blank, Google auto-generates one — often pulling random text from your page that doesn't compel clicks. Pages with well-written descriptions get 5-10% more clicks than those without.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Write unique, compelling descriptions (150-160 characters) for every page. Include your target keyword and a call to action.
+                </div>
+                <div class="issue-card-count">2 pages with empty descriptions</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Form Labels</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Poor form accessibility reduces conversion and SEO score</div>
+                <div class="issue-card-body">
+                    5 pages have form inputs without proper labels. This makes forms difficult for screen readers and auto-fill tools to understand. For a business that relies on form submissions (quotes, contact requests), inaccessible forms directly reduce your conversion rate — visitors give up if the form doesn't work smoothly on their device.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Ensure all form fields have associated &lt;label&gt; elements. In Wix, check that every input field in your forms has a visible label or placeholder configured.
+                </div>
+                <div class="issue-card-count">5 pages</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- WHAT'S WORKING -->
+        <div class="section">
+            <div class="section-header">
+                <h2>What's Working Well</h2>
+                <div class="section-sub">These fundamentals are solid — credit where it's due.</div>
+            </div>
+
+            <div class="pass-grid">
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Zero Broken Links
+                        <span>Every internal link resolves correctly</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Unique Title Tags
+                        <span>All 17 pages have distinct titles</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Valid SSL Certificate
+                        <span>Let's Encrypt — expires Jun 9, 2026</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        HSTS Enabled
+                        <span>Forces secure connections</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Valid HTML
+                        <span>No parsing errors on any page</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        HTML Lang Attribute Set
+                        <span>Tells Google your content language</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        All Pages Under 3s Load
+                        <span>No timeout issues detected</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Clickable Phone Numbers
+                        <span>Mobile users can tap to call</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PERFORMANCE -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Page Speed Analysis</h2>
+                <div class="section-sub">Server response times. Google recommends under 200ms for Time to First Byte (TTFB). Slow pages lose rankings.</div>
+            </div>
+
+            <table class="perf-table">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>Response Time</th>
+                        <th>Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>/post/top-5-plumbers-in-guelph</strong></td>
+                        <td>1,839ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>/post/how-to-recycle-materials</strong></td>
+                        <td>1,598ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>/post/top-5-roofing-contractors</strong></td>
+                        <td>1,578ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/blog</td>
+                        <td>961ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-slow"></span> Slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/contact-us</td>
+                        <td>780ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-slow"></span> Slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>Other pages (avg)</td>
+                        <td>~500ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-slow"></span> Acceptable</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="platform-note" style="margin-top: 20px;">
+                <strong>Note on Wix performance:</strong> Wix sites typically have higher response times due to their platform architecture. Blog posts are particularly slow because Wix dynamically generates them. These speeds are within typical Wix range but well below what a custom-built site achieves (100-200ms).
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Quote -->
+        <div class="quote-section">
+            <h2>Recommended Fixes — Estimate</h2>
+            <div class="quote-sub">One-time remediation to resolve all fixable issues identified in this audit.</div>
+
+            <div class="quote-line">
+                <span class="item">Accessibility remediation (ARIA, roles, form labels, alt text)</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Heading structure & H1 fixes</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Meta description writing (2 pages)</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Image optimization & alt text</span>
+                <span class="price">$———</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Platform migration consultation (to resolve security/speed limitations)</span>
+                <span class="price">$———</span>
+            </div>
+
+            <div class="quote-total">
+                <span class="item">Total</span>
+                <span class="price">$———</span>
+            </div>
+
+            <div class="quote-note">
+                Several critical issues (security headers, TLS configuration, compression, DOM depth) cannot be fixed on Wix. A platform migration would resolve these permanently while also improving page speed by 3-5x. We can discuss this option in more detail.<br><br>
+                All prices are one-time implementations. Ongoing monitoring available separately.
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-bar">
+            <p>Questions about this report? Reply directly to this email or reach out at <strong>hello@ponterastudios.com</strong></p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-brand">Pontera Studios</div>
+            <div class="footer-contact">hello@ponterastudios.com</div>
+        </div>
+    </div>
+
+</body>
+</html>

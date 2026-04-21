@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Audit Report - blaiselectric.ca</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1a1a2e;
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #fff;
+            padding: 70px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: #fff; }
+
+        .report-badge {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 4px;
+        }
+
+        .cover-content { position: relative; z-index: 1; }
+
+        .cover-content h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .cover-content .client-url { font-size: 16px; color: #60a5fa; font-weight: 500; margin-bottom: 6px; }
+        .cover-content .cover-date { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 20px; }
+
+        .score-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .score-item {
+            padding: 28px 24px;
+            text-align: center;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .score-item:last-child { border-right: none; }
+
+        .score-number {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .score-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #64748b;
+        }
+
+        .green { color: #059669; }
+        .yellow { color: #d97706; }
+        .red { color: #dc2626; }
+        .blue { color: #2563eb; }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 60px;
+        }
+
+        .section-intro {
+            margin-bottom: 50px;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+            border-radius: 10px;
+            border: 1px solid #dbeafe;
+        }
+
+        .section-intro h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e40af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-intro p { font-size: 14px; color: #475569; line-height: 1.7; }
+
+        .section { margin-bottom: 50px; }
+        .section-header { margin-bottom: 24px; }
+        .section-header h2 { font-size: 20px; font-weight: 700; color: #0f172a; letter-spacing: -0.3px; }
+        .section-header .section-sub { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+        .issue-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 16px;
+        }
+
+        .issue-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .issue-card-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+
+        .severity {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .severity-high { background: #fef2f2; color: #b91c1c; }
+        .severity-medium { background: #fffbeb; color: #b45309; }
+        .severity-low { background: #f0fdf4; color: #15803d; }
+
+        .severity-dot { width: 6px; height: 6px; border-radius: 50%; }
+        .severity-high .severity-dot { background: #dc2626; }
+        .severity-medium .severity-dot { background: #f59e0b; }
+        .severity-low .severity-dot { background: #22c55e; }
+
+        .issue-card-body { font-size: 13px; color: #475569; line-height: 1.7; margin-bottom: 14px; }
+
+        .issue-card-impact {
+            font-size: 12px;
+            color: #1e40af;
+            font-weight: 600;
+            background: #eff6ff;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .issue-card-fix {
+            font-size: 13px;
+            color: #334155;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .issue-card-fix strong { color: #1e40af; }
+        .issue-card-count { font-size: 12px; color: #94a3b8; margin-top: 10px; }
+
+        .pass-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .pass-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 16px 18px;
+            background: #f8fdf9;
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+        }
+
+        .pass-check {
+            width: 20px;
+            height: 20px;
+            background: #059669;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .pass-check svg { width: 12px; height: 12px; }
+
+        .pass-text { font-size: 13px; font-weight: 500; color: #1a1a2e; }
+        .pass-text span { display: block; font-size: 11px; font-weight: 400; color: #64748b; margin-top: 2px; }
+
+        .perf-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .perf-table thead { background: #f1f5f9; }
+
+        .perf-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #334155;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .perf-table td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; color: #475569; }
+        .perf-table tr:last-child td { border-bottom: none; }
+
+        .speed-indicator { display: inline-flex; align-items: center; gap: 6px; }
+        .speed-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .speed-good { background: #10b981; }
+        .speed-slow { background: #f59e0b; }
+        .speed-bad { background: #ef4444; }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 50px 0;
+        }
+
+        .stat-highlight {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat-box.warning {
+            background: #fffbeb;
+            border-color: #fde68a;
+        }
+
+        .stat-box .stat-num {
+            font-size: 28px;
+            font-weight: 800;
+            color: #dc2626;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-box.warning .stat-num { color: #d97706; }
+
+        .stat-box .stat-desc {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6b7280;
+        }
+
+        .quote-section {
+            background: #0f172a;
+            color: #fff;
+            border-radius: 12px;
+            padding: 36px;
+            margin-top: 50px;
+        }
+
+        .quote-section h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+        .quote-section .quote-sub { font-size: 13px; color: #94a3b8; margin-bottom: 24px; }
+
+        .quote-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .quote-line:last-of-type { border-bottom: none; }
+        .quote-line .item { color: #cbd5e1; font-size: 14px; }
+        .quote-line .price { font-weight: 700; color: #fff; font-size: 14px; }
+
+        .quote-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0 0;
+            margin-top: 14px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .quote-total .item { font-size: 16px; font-weight: 700; color: #fff; }
+        .quote-total .price { font-size: 18px; font-weight: 800; color: #60a5fa; }
+        .quote-note { font-size: 12px; color: #64748b; margin-top: 20px; line-height: 1.6; }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand { font-size: 15px; font-weight: 700; color: #0f172a; }
+        .footer-contact { font-size: 13px; color: #64748b; }
+
+        .cta-bar {
+            text-align: center;
+            margin-top: 30px;
+            padding: 24px;
+            background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 100%);
+            border-radius: 10px;
+            border: 1px solid #dbeafe;
+        }
+
+        .cta-bar p { font-size: 14px; color: #334155; }
+        .cta-bar strong { color: #1e40af; }
+
+        .url-list {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 8px;
+            padding-left: 16px;
+            line-height: 1.8;
+        }
+
+        .url-list li { margin-bottom: 2px; }
+    </style>
+</head>
+<body>
+
+    <!-- Cover -->
+    <div class="cover">
+        <div class="cover-header">
+            <div class="brand">Pontera Studios</div>
+            <div class="report-badge">Site Audit Report</div>
+        </div>
+        <div class="cover-content">
+            <h1>Website Health &<br>SEO Performance Audit</h1>
+            <div class="client-url">blaiselectric.ca</div>
+            <div class="cover-date">Report generated April 20, 2026</div>
+        </div>
+    </div>
+
+    <!-- Score Strip -->
+    <div class="score-strip">
+        <div class="score-item">
+            <div class="score-number blue">129</div>
+            <div class="score-label">Pages Analyzed</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number red">1</div>
+            <div class="score-label">Broken Link</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number yellow">437</div>
+            <div class="score-label">Warnings</div>
+        </div>
+        <div class="score-item">
+            <div class="score-number red">258</div>
+            <div class="score-label">Critical Errors</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        <!-- Intro -->
+        <div class="section-intro">
+            <h3>What This Report Covers</h3>
+            <p>We crawled all 129 pages of blaiselectric.ca and analyzed each one for technical SEO issues, accessibility compliance, security vulnerabilities, page speed, and content structure. Each issue is ranked by its direct impact on your Google search rankings. This site has significant security gaps and content issues that are likely suppressing your visibility in search results for competitive keywords like "electrician Guelph" and "EV charger installation."</p>
+        </div>
+
+        <!-- Summary Highlights -->
+        <div class="stat-highlight">
+            <div class="stat-box">
+                <div class="stat-num">81</div>
+                <div class="stat-desc">Pages missing<br>meta descriptions</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">10</div>
+                <div class="stat-desc">Pages missing<br>H1 headings</div>
+            </div>
+            <div class="stat-box warning">
+                <div class="stat-num">42</div>
+                <div class="stat-desc">Pages with<br>heading errors</div>
+            </div>
+        </div>
+
+        <!-- CRITICAL ISSUES -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Critical Issues</h2>
+                <div class="section-sub">These are actively harming your search rankings and leaving your site vulnerable. Fix immediately.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">No HSTS (Strict-Transport-Security) Header</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Google downgrades sites vulnerable to man-in-the-middle attacks</div>
+                <div class="issue-card-body">
+                    None of your 129 pages set the Strict-Transport-Security header. HSTS tells browsers to always connect via HTTPS — without it, visitors can be intercepted on insecure connections before the redirect to HTTPS happens. Google considers this a security vulnerability and ranks sites without HSTS below those that have it. Worse, browsers like Chrome may show a "Not Secure" warning in certain scenarios, immediately destroying visitor trust.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add the header <code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code> to all responses. This is configured in your WordPress server (likely through Cloudflare, since that's your CDN) or via a security plugin like Really Simple SSL.
+                </div>
+                <div class="issue-card-count">All 129 pages affected</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Content Security Policy (CSP)</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Sites without CSP are vulnerable to XSS — Google penalizes insecure sites</div>
+                <div class="issue-card-body">
+                    Your site has no Content-Security-Policy header on any page. CSP prevents cross-site scripting attacks by controlling which scripts and resources can execute on your pages. Without it, a single vulnerability in a WordPress plugin could allow attackers to inject malicious code into your site — which Google would detect and flag, potentially removing you from search results entirely (a "manual action" penalty).
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Implement a CSP header through Cloudflare Transform Rules or a WordPress security plugin. Start with a report-only policy to identify issues, then enforce. Example: <code>Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'</code>
+                </div>
+                <div class="issue-card-count">All 129 pages affected</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">81 Pages Missing Meta Descriptions</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: 63% of your site has no description — devastating for click-through rates</div>
+                <div class="issue-card-body">
+                    81 out of 129 pages (63%) have completely empty meta descriptions. The meta description is the text snippet shown below your link in Google search results — it's your "sales pitch" to the searcher. When it's blank, Google auto-generates one by pulling random text from your page, which almost never compels a click. Studies show that well-written descriptions improve click-through rates by 5-10%. At 63% of your site missing them, you're losing significant organic traffic to competitors who have them.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Write unique, compelling meta descriptions (150-160 characters) for every page. Use your SEO plugin (likely Yoast or RankMath) to add them. Prioritize service pages first, then blog categories, then individual posts.
+                </div>
+                <div class="issue-card-count">81 pages — mostly category/tag archives and blog pagination</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">10 Pages Missing H1 Headings</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: H1 is the strongest on-page signal for what a page is about</div>
+                <div class="issue-card-body">
+                    10 pages have no H1 heading tag at all. The H1 is the single most important on-page SEO element — it tells Google the primary topic of the page. Without it, Google has to guess from surrounding content, which means lower confidence in ranking you for your target keywords. These include your blog landing page and all paginated blog pages — the pages you'd want ranking for informational queries.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add clear, keyword-rich H1 headings to all affected pages. For the blog page, something like "Electrical Tips & Green Energy Insights" — for the resources page, match it to the page's purpose.
+                </div>
+                <ul class="url-list">
+                    <li>/blog/ (and all paginated pages /blog/?query-14-page=1 through 7)</li>
+                    <li>/general/resources-for-local-guelph-area-clients/</li>
+                </ul>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">TLSv1.2 Not Supported</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> Critical</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Incompatible devices cannot access your site at all</div>
+                <div class="issue-card-body">
+                    Your server only supports TLSv1.3 with no TLSv1.2 fallback. While TLSv1.3 is the latest standard, many corporate networks, older Android devices, and some crawlers still require TLSv1.2. This means a portion of your potential customers — particularly businesses on older enterprise networks looking for commercial electrical work — may get a connection error instead of your website.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Enable TLSv1.2 in your Cloudflare SSL/TLS settings. Go to SSL/TLS → Edge Certificates → Minimum TLS Version and set it to TLS 1.2 (not 1.3).
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- HIGH PRIORITY -->
+        <div class="section">
+            <div class="section-header">
+                <h2>High Priority Issues</h2>
+                <div class="section-sub">These significantly reduce your ranking potential and should be fixed within the next 2-4 weeks.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">42 Pages with Broken Heading Structure</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Confuses Google's understanding of content hierarchy</div>
+                <div class="issue-card-body">
+                    42 pages have heading structure errors — skipping levels (H1 → H3), using multiple H1s, or starting without an H1. Headings create an outline that Google reads to understand what's important on your page. When the structure is broken, Google misinterprets your content relationships. For 10 of these pages, the errors are critical (completely invalid structure). This is one of the easiest wins on your site — fixing headings often produces visible ranking improvements within 2-3 weeks.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Audit each page's heading structure. Ensure every page has exactly one H1, followed by H2s for major sections, H3s for subsections. Never skip levels. In WordPress, check your theme templates and individual post content.
+                </div>
+                <div class="issue-card-count">42 pages — 10 critical, 32 warnings</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing Security Headers (5 Types)</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Multiple vulnerability vectors reduce Google's trust in your site</div>
+                <div class="issue-card-body">
+                    Beyond CSP and HSTS, your site is also missing: X-Frame-Options (clickjacking protection), X-Content-Type-Options (MIME sniffing protection), Referrer-Policy (data leakage control), and Permissions-Policy (browser feature restrictions). Each of these represents a different attack surface. Google's ranking algorithm considers overall site security — when competitors have these and you don't, they rank higher for the same keywords.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add all headers via Cloudflare Transform Rules (free tier supports this) or a WordPress security plugin. This is a 15-minute configuration change that protects all 129 pages at once.
+                </div>
+                <div class="issue-card-count">All 129 pages missing all 5 headers</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">No Brotli Compression</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Directly affects Core Web Vitals page speed scores</div>
+                <div class="issue-card-body">
+                    128 pages are not served with Brotli compression. Brotli reduces page transfer size by 15-25% compared to gzip, directly improving load times. Since Google uses Core Web Vitals as a ranking factor, uncompressed pages that load slower will rank below compressed competitors. For a 129-page WordPress site with images and scripts, this adds up to significant bandwidth waste.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Enable Brotli in Cloudflare: Speed → Optimization → Content Optimization → Brotli. Toggle it on. Instant improvement across all pages.
+                </div>
+                <div class="issue-card-count">128 out of 129 pages</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Missing ARIA Labels (108 Elements)</div>
+                    <span class="severity severity-high"><span class="severity-dot"></span> High</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Accessibility is a confirmed Google ranking signal</div>
+                <div class="issue-card-body">
+                    108 interactive elements across your site are missing ARIA labels. These tell Google and screen readers what buttons, links, and form fields do. Google uses accessibility as a ranking factor — sites that score poorly here lose position to accessible competitors. For a service business, this also impacts conversions: users with assistive technology cannot navigate to your contact or quote request pages.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add descriptive aria-label attributes to all buttons, nav links, and interactive elements. Check your WordPress theme's template files and any page builder elements (sliders, menus, CTAs).
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- MEDIUM PRIORITY -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Medium Priority Recommendations</h2>
+                <div class="section-sub">These give you a competitive edge and improve user experience.</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">Duplicate Blog Titles & Descriptions (9 Pages)</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Duplicate content signals confuse Google about which page to rank</div>
+                <div class="issue-card-body">
+                    9 pages share the exact same title "Blog | Blais Electric" and the same meta description. This is your blog's paginated pages (/blog/, /blog/?query-14-page=1, etc.). When Google sees multiple pages with identical titles and descriptions, it doesn't know which one to show in results — so it may show none of them, or pick one at random. This dilutes your blog's SEO power across 9 competing URLs instead of concentrating it.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add unique title suffixes (e.g., "Blog - Page 2 | Blais Electric") and set rel="canonical" on paginated pages pointing back to /blog/. Your SEO plugin should handle this — check its pagination settings.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">7 Pages with Missing Image Alt Text</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Images without alt text are invisible to Google Image Search</div>
+                <div class="issue-card-body">
+                    7 pages have images without alt attributes. For an electrical company, project photos are a key traffic source — homeowners search Google Images for "EV charger installation" or "electrical panel upgrade" and find service providers through image results. Every image without alt text is a missed opportunity to rank in Google Images and drive qualified traffic.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Add descriptive alt text to every image (e.g., "Level 2 EV charger installed in Guelph garage by Blais Electric" not "IMG_3421"). Do this in the WordPress media library or directly in the block editor.
+                </div>
+                <div class="issue-card-count">7 pages</div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">No AVIF Image Support</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Affects Largest Contentful Paint (LCP) — a Core Web Vital</div>
+                <div class="issue-card-body">
+                    While your site does serve WebP images (good!), it doesn't offer AVIF — the newest format that's 20-30% smaller than even WebP. For image-heavy pages like project galleries and blog posts, this means you're leaving speed improvements on the table. Google's LCP metric directly measures how fast your largest image loads.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Use an image optimization plugin (ShortPixel, Imagify, or EWWW) that automatically generates and serves AVIF versions with a WebP fallback.
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-card-header">
+                    <div class="issue-card-title">1 Broken Link (404)</div>
+                    <span class="severity severity-medium"><span class="severity-dot"></span> Medium</span>
+                </div>
+                <div class="issue-card-impact">Ranking Impact: Broken links waste crawl budget and signal poor maintenance</div>
+                <div class="issue-card-body">
+                    A link on your COVID-19 electrical services page points to /post/covid-19-self-assessment-protocols which returns a 404. Broken links tell Google your site isn't well-maintained and waste the "crawl budget" Google allocates to your site. They also frustrate visitors who hit dead ends.
+                </div>
+                <div class="issue-card-fix">
+                    <strong>The fix:</strong> Either create a redirect from the dead URL to a relevant page, or remove/update the link on the source page (/general/electrical-services-in-the-time-of-covid-19/).
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- WHAT'S WORKING -->
+        <div class="section">
+            <div class="section-header">
+                <h2>What's Working Well</h2>
+                <div class="section-sub">These fundamentals are in good shape.</div>
+            </div>
+
+            <div class="pass-grid">
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Unique Title Tags
+                        <span>119 distinct titles across the site</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        WebP Images Served
+                        <span>117 pages use modern image formats</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Valid SSL Certificate
+                        <span>Google Trust Services — valid until Jun 21</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Clean DOM Structure
+                        <span>All 129 pages under depth limit</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Clickable Phone Numbers
+                        <span>Mobile users can tap to call</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        HTML Lang Attribute Set
+                        <span>Tells Google your content language</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        XSS Protection Active
+                        <span>Browser-level script protection on</span>
+                    </div>
+                </div>
+                <div class="pass-item">
+                    <div class="pass-check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="pass-text">
+                        Secure Cookies
+                        <span>Cookie handling passes security checks</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PERFORMANCE -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Page Speed Analysis</h2>
+                <div class="section-sub">Server response times. Google recommends under 200ms for TTFB. Your slowest pages are 7-9x over this threshold.</div>
+            </div>
+
+            <table class="perf-table">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>Response Time</th>
+                        <th>Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>/category/kitchener-waterloo/</strong></td>
+                        <td>1,477ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>/category/guelph-resources/</strong></td>
+                        <td>1,348ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/category/general/page/2/</td>
+                        <td>1,334ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/tag/heat-pump-installation/page/2/</td>
+                        <td>1,322ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/tag/ev-charger-installation/</td>
+                        <td>1,270ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/tag/home-ev-charger-options/</td>
+                        <td>1,264ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/tag/evems-installation/</td>
+                        <td>1,218ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                    <tr>
+                        <td>/category/money-saving/</td>
+                        <td>1,211ms</td>
+                        <td><span class="speed-indicator"><span class="speed-dot speed-bad"></span> Very slow</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="font-size: 13px; color: #64748b; margin-top: 16px; line-height: 1.7;">
+                <strong>Pattern:</strong> Category and tag archive pages are consistently the slowest. This suggests your WordPress theme's archive templates are making excessive database queries or loading unnecessary assets. These are often the pages Google crawls most frequently (they link to your content), so their speed directly affects how efficiently Google indexes your site.
+            </p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Quote -->
+        <div class="quote-section">
+            <h2>Recommended Fixes — Estimate</h2>
+            <div class="quote-sub">One-time remediation to resolve all issues identified in this audit.</div>
+
+            <div class="quote-line">
+                <span class="item">Security header configuration (HSTS, CSP, X-Frame, etc.)</span>
+                <span class="price">$550</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Meta descriptions for 81 pages</span>
+                <span class="price">$2,400</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">H1 headings + heading structure fix (42 pages)</span>
+                <span class="price">$1,900</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Accessibility remediation (ARIA labels, roles, alt text)</span>
+                <span class="price">$4,800</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Brotli compression + TLS configuration</span>
+                <span class="price">$275</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Blog pagination SEO (canonicals, unique titles)</span>
+                <span class="price">$375</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Page speed optimization (archive templates)</span>
+                <span class="price">$750</span>
+            </div>
+            <div class="quote-line">
+                <span class="item">Broken link fix + redirect cleanup</span>
+                <span class="price">$250</span>
+            </div>
+
+            <div class="quote-total">
+                <span class="item">Total</span>
+                <span class="price">$11,300</span>
+            </div>
+
+            <div class="quote-note">
+                All fixes are one-time implementations. Most security and compression fixes are immediate (Cloudflare configuration). Content work (descriptions, headings) typically takes 1-2 weeks. Ongoing monitoring and monthly SEO maintenance available as a separate retainer.<br><br>
+                Reply to this email or book a call to discuss priorities and timeline.
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-bar">
+            <p>Questions about this report? Reply directly to this email or reach out at <strong>hello@ponterastudios.com</strong></p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-brand">Pontera Studios</div>
+            <div class="footer-contact">hello@ponterastudios.com</div>
+        </div>
+    </div>
+
+</body>
+</html>
