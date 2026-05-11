@@ -1,40 +1,49 @@
 using Backend.Services.Interfaces;
-using MailKit.Net.Smtp;
-using MimeKit;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 
 namespace Backend.Services;
 
 public class EmailService : IEmailService
 {
-    private readonly string _gmailUser;
-    private readonly string _appPassword;
+    private readonly string _apiKey;
     private readonly string _notifyTo;
+    private readonly HttpClient _httpClient;
     private const string FromName = "Pontera Studios";
     private const string FromAddress = "hello@ponterastudios.com";
+    private const string ResendUrl = "https://api.resend.com/emails";
 
-    public EmailService(IConfiguration config)
+    public EmailService(IConfiguration config, IHttpClientFactory httpClientFactory)
     {
-        _gmailUser = config["Email:GmailUser"] ?? throw new Exception("Email:GmailUser not configured");
-        _appPassword = config["Email:AppPassword"] ?? throw new Exception("Email:AppPassword not configured");
-        _notifyTo = config["Email:NotifyTo"] ?? _gmailUser;
+        _apiKey = config["Resend:ApiKey"] ?? throw new Exception("Resend:ApiKey not configured");
+        _notifyTo = config["Email:NotifyTo"] ?? "slatecodestudio@gmail.com";
+        _httpClient = httpClientFactory.CreateClient();
     }
 
     // ── Internal send method ──
 
     private async Task SendAsync(string toName, string toEmail, string subject, string htmlBody)
     {
-        var message = new MimeMessage();
-        message.From.Add(new MailboxAddress(FromName, FromAddress));
-        message.To.Add(new MailboxAddress(toName, toEmail));
-        message.Subject = subject;
+        var payload = new
+        {
+            from = $"{FromName} <{FromAddress}>",
+            to = new[] { toEmail },
+            subject = subject,
+            html = htmlBody
+        };
 
-        message.Body = new TextPart("html") { Text = htmlBody };
+        var json = JsonSerializer.Serialize(payload);
+        var request = new HttpRequestMessage(HttpMethod.Post, ResendUrl);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
+        request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        using var client = new SmtpClient();
-        await client.ConnectAsync("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-        await client.AuthenticateAsync(_gmailUser, _appPassword);
-        await client.SendAsync(message);
-        await client.DisconnectAsync(true);
+        var response = await _httpClient.SendAsync(request);
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Resend API error ({response.StatusCode}): {error}");
+        }
     }
 
     // ── Contact form ──

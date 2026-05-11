@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IGeminiService, GeminiService>();
 builder.Services.AddHttpClient<IHubSpotService, HubSpotService>();
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddCors(options =>
 {
@@ -238,40 +239,36 @@ app.MapPost("/api/contact", async (ContactRequest request, IHubSpotService hubsp
             request.Message
         );
 
-        // Send emails (fire-and-forget — don't block the response)
-        _ = Task.Run(async () =>
+        // Send emails
+        try
         {
-            try
-            {
-                var isSeoRequest = request.Service?.StartsWith("Free SEO Report", StringComparison.OrdinalIgnoreCase) == true;
+            var isSeoRequest = request.Service?.StartsWith("Free SEO Report", StringComparison.OrdinalIgnoreCase) == true;
 
-                if (isSeoRequest)
-                {
-                    // Extract website URL from service field: "Free SEO Report — https://example.com"
-                    var website = request.Service!.StartsWith("Free SEO Report - ")
-                        ? request.Service.Substring("Free SEO Report - ".Length).Trim()
-                        : request.Message;
-
-                    await emailService.SendSeoRequestNotificationAsync(
-                        request.Name, request.Email, request.Company, website, request.Message);
-                    await emailService.SendSeoAutoReplyAsync(
-                        request.Name, request.Email, website);
-                    Console.WriteLine($"[Email] SEO request emails sent for {request.Email}");
-                }
-                else
-                {
-                    await emailService.SendContactNotificationAsync(
-                        request.Name, request.Email, request.Company, request.Service!, request.Message);
-                    await emailService.SendContactAutoReplyAsync(
-                        request.Name, request.Email);
-                    Console.WriteLine($"[Email] Contact emails sent for {request.Email}");
-                }
-            }
-            catch (Exception emailEx)
+            if (isSeoRequest)
             {
-                Console.WriteLine($"[Email] Failed to send: {emailEx.Message}");
+                var website = request.Service!.StartsWith("Free SEO Report - ")
+                    ? request.Service.Substring("Free SEO Report - ".Length).Trim()
+                    : request.Message;
+
+                await emailService.SendSeoRequestNotificationAsync(
+                    request.Name, request.Email, request.Company, website, request.Message);
+                await emailService.SendSeoAutoReplyAsync(
+                    request.Name, request.Email, website);
+                Console.WriteLine($"[Email] SEO request emails sent for {request.Email}");
             }
-        });
+            else
+            {
+                await emailService.SendContactNotificationAsync(
+                    request.Name, request.Email, request.Company, request.Service!, request.Message);
+                await emailService.SendContactAutoReplyAsync(
+                    request.Name, request.Email);
+                Console.WriteLine($"[Email] Contact emails sent for {request.Email}");
+            }
+        }
+        catch (Exception emailEx)
+        {
+            Console.WriteLine($"[Email] Failed to send: {emailEx.Message}");
+        }
 
         return Results.Ok(new { success = true });
     }
