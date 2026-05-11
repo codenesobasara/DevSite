@@ -22,12 +22,8 @@ function FadeSection({ children }) {
   const blur = useTransform(scrollYProgress, [0.5, 1], [0, 12])
   const filter = useTransform(blur, (v) => `blur(${v}px)`)
 
-  if (!isDesktop) {
-    return <div>{children}</div>
-  }
-
   return (
-    <motion.div ref={ref} style={{ opacity, filter }}>
+    <motion.div ref={ref} style={isDesktop ? { opacity, filter } : undefined}>
       {children}
     </motion.div>
   )
