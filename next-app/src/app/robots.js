@@ -1,12 +1,13 @@
 export default function robots() {
   return {
     rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/api/"],
-      },
+      { userAgent: "*", allow: "/" },
+      { userAgent: "GPTBot", allow: "/" },
+      { userAgent: "Claude-Web", allow: "/" },
+      { userAgent: "PerplexityBot", allow: "/" },
+      { userAgent: "ChatGPT-User", allow: "/" },
+      { userAgent: "Googlebot", allow: "/" },
     ],
-    sitemap: "https://slatecode.dev/sitemap.xml",
+    sitemap: "https://www.ponterastudios.com/sitemap.xml",
   }
 }

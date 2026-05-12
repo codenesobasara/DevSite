@@ -14,14 +14,14 @@ export async function generateMetadata({ params }) {
   if (!post) return {}
 
   return {
-    title: `${post.title} — Slate Studio Blog`,
+    title: post.title,
     description: post.description,
     openGraph: {
-      title: `${post.title} — Slate Studio`,
+      title: `${post.title} | Pontera Studios`,
       description: post.description,
     },
     alternates: {
-      canonical: `https://slatecode.dev/blog/${params.slug}`,
+      canonical: `https://www.ponterastudios.com/blog/${params.slug}`,
     },
   }
 }
@@ -35,9 +35,9 @@ export default async function BlogPost({ params }) {
 
   return (
     <div className="min-h-screen">
-      <NavBar agencyName="Slate Studio" />
+      <NavBar agencyName="Pontera Studios" />
 
-      <main className="w-full px-5 md:px-8 pt-20 md:pt-50 md:pl-25 md:pr-25 max-w-3xl">
+      <main className="w-full px-5 xl:px-8 pt-24 xl:pt-50 xl:pl-25 xl:pr-25 max-w-3xl">
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm mb-8 transition-colors"
@@ -56,7 +56,7 @@ export default async function BlogPost({ params }) {
           </p>
         )}
 
-        <h1 className="text-4xl font-medium mb-4">{post.title}</h1>
+        <h1 className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4">{post.title}</h1>
 
         {post.author && (
           <p className="text-white/40 text-sm mb-12">By {post.author}</p>

@@ -1,86 +1,199 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 
-function HeroSection() {
+const caseStudies = [
+  {
+    slug: "focuspoint",
+    title: "Focus Point Media",
+    image: "/images/focuspoint-hero.webp",
+    description:
+      "A dual-market portfolio and lead generation platform for a commercial photography studio. Custom CMS, CRM integration, and global edge deployment.",
+    brief: "Portfolio & lead gen platform for a commercial photography studio.",
+  },
+  {
+    slug: "basara",
+    title: "Basara",
+    image: "/images/basara-hero.webp",
+    description:
+      "A hyperlocal real estate market intelligence platform covering 7 cities and 50+ neighbourhoods with automated data pipelines and AI narratives.",
+    brief: "Real estate market intelligence across 7 cities and 50+ neighbourhoods.",
+  },
+  {
+    slug: "medleads",
+    title: "MedLeads",
+    image: "/images/MedLeadsScreenSHot.webp",
+    description:
+      "A full-stack event analytics platform with real-time lead capture, sales rep performance tracking, and territory management for healthcare trade shows.",
+    brief: "Real-time lead capture and analytics for healthcare trade shows.",
+  },
+  {
+    slug: "transcribatron",
+    title: "Transcribatron",
+    image: "/images/transcribeAtron.webp",
+    description:
+      "A native iOS app that transcribes speech entirely on-device, then polishes the text with the user's choice of AI provider.",
+    brief: "On-device speech transcription with AI polish. Native iOS.",
+  },
+]
+
+const FULL_TEXT = "Build Something Great\nFor Your Business"
+const TYPE_SPEED = 40
+
+function HeroSection({ mobileInsert }) {
+  const [charCount, setCharCount] = useState(0)
+  const typingDone = charCount >= FULL_TEXT.length
+
+  useEffect(() => {
+    let i = 0
+    const interval = setInterval(() => {
+      i++
+      setCharCount(i)
+      if (i >= FULL_TEXT.length) {
+        clearInterval(interval)
+      }
+    }, TYPE_SPEED)
+    return () => clearInterval(interval)
+  }, [])
+
+  const displayedText = FULL_TEXT.slice(0, charCount)
+
   return (
-    <main className="w-full px-5 md:px-8 pt-20 md:pt-35">
-      <div className="grid grid-cols-1 md:grid-cols-2 h-full">
-        <div className="col-span-1 flex flex-col justify-between">
+    <>
+      {/* Mobile / Tablet layout (up to xl) */}
+      <main className="block xl:hidden w-full px-4 pt-24 phone-ls:pt-16 pb-8 phone-ls:pb-4">
+        <div className="flex flex-col phone-ls:flex-row phone-ls:items-start gap-4 phone-ls:gap-6">
+          <div className="px-2 sm:px-4 phone-ls:flex-1">
+            <h1 className="text-[8vw] sm:text-[6vw] md:text-[5vw] phone-ls:text-[4vw] font-medium tracking-tight leading-[1.05] whitespace-pre-line">
+              {displayedText}
+            </h1>
+            {typingDone && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                className="text-white/50 text-sm sm:text-base mt-4 phone-ls:mt-2 max-w-md"
+              >
+                Custom software, web platforms, and AI integration for growing businesses.
+              </motion.p>
+            )}
+          </div>
+
+          {typingDone && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="px-2 sm:px-4 phone-ls:flex-1"
+          >
+            <div className="flex items-center justify-between mb-5 phone-ls:mb-3">
+              <h2 className="text-lg sm:text-xl font-medium">Our Work</h2>
+              <Link href="/case-study" className="text-white/40 text-xs hover:text-white transition-colors">
+                View All →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:max-w-md md:mx-auto">
+              {caseStudies.map((study) => (
+                <Link
+                  key={study.slug}
+                  href={`/case-study/${study.slug}`}
+                  className="group"
+                >
+                  <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 sm:p-5 md:p-4 aspect-square md:aspect-[4/3] phone-ls:aspect-[4/3] flex flex-col justify-between transition-all duration-200 group-hover:border-white/25">
+                    <p className="text-white/40 text-[11px] sm:text-xs leading-snug">
+                      {study.brief}
+                    </p>
+                    <span className="text-white font-medium text-sm sm:text-base md:text-sm leading-tight">
+                      {study.title}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+          )}
+
+          {typingDone && mobileInsert && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              className="flex flex-col gap-4"
+            >
+              {mobileInsert}
+            </motion.div>
+          )}
+        </div>
+      </main>
+
+      {/* Desktop layout (xl and up) */}
+      <main className="hidden xl:block w-full px-8 pt-28">
+        <div className="grid grid-cols-2 items-start gap-[3vw]">
           <div>
-            <h1 className="text-3xl md:text-5xl pt-10 md:pl-15">
-              Software Development Studio Based in Kitchener-Waterloo
+            <h1 className="text-[5vw] font-medium tracking-tight leading-[1.05] pt-10 pl-15 whitespace-pre-line">
+              {displayedText}
             </h1>
           </div>
-          <div className="pt-12 md:pt-24 text-left md:pl-24">
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tight">Built For Tomorrow</h2>
-            <p className="text-white/60 text-base md:text-lg mt-4 md:mt-6 max-w-lg leading-relaxed">
-              We help businesses move faster with custom software, automation,
-              and strategy. No templates, no shortcuts — just real solutions
-              built by developers who understand your goals.
-            </p>
-          </div>
-        </div>
 
-        <div className="col-span-1 mt-12 md:mt-0 md:pl-25">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-            <div className="w-full md:w-1/2 pt-0 md:pt-106">
-              <Card>
-                <Image
-                  src="/images/MedLeadsScreenSHot.png"
-                  alt="MedLeads project preview"
-                  width={400}
-                  height={192}
-                  className="w-full object-cover h-48"
-                />
-                <CardHeader>MedLeads</CardHeader>
-                <CardContent>
-                  Real-time lead capture and analytics platform for healthcare
-                  trade shows. Live dashboards, rep tracking, and territory
-                  management built from the ground up.
-                </CardContent>
-                <CardFooter>
-                  <Link href="/case-studies/medleads">
-                    <Button variant="white">
-                      <ArrowRight />
-                      View Case Study
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
+          <motion.div
+            className="pt-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={typingDone ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="grid grid-cols-2 gap-[1.5vw]">
+              {caseStudies.filter(s => s.slug === "focuspoint" || s.slug === "medleads").map((study, i) => (
+                <motion.div
+                  key={study.slug}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={typingDone ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.15 * i }}
+                >
+                  <Card>
+                    <div className="aspect-video overflow-hidden">
+                      <img
+                        src={study.image}
+                        alt={`${study.title} project preview`}
+                        className="w-full h-full object-cover"
+                        loading={i === 0 ? "eager" : "lazy"}
+                        fetchPriority={i === 0 ? "high" : "auto"}
+                      />
+                    </div>
+                    <CardHeader>{study.title}</CardHeader>
+                    <CardContent>{study.description}</CardContent>
+                    <CardFooter>
+                      <Link href={`/case-study/${study.slug}`} aria-label={`View ${study.title} case study`}>
+                        <Button variant="white">
+                          <ArrowRight />
+                          View Case Study
+                        </Button>
+                      </Link>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              ))}
             </div>
-
-            <div className="w-full md:w-1/2 pt-0 md:pt-106">
-              <Card>
-                <Image
-                  src="/images/transcribeAtron.png"
-                  alt="Transcriber app project preview"
-                  width={400}
-                  height={192}
-                  className="w-full object-cover h-48"
-                />
-                <CardHeader>Transcriber App</CardHeader>
-                <CardContent>
-                  Audio transcription tool that converts recordings into
-                  clean, searchable text. Built for speed and accuracy
-                  with a simple, focused interface.
-                </CardContent>
-                <CardFooter>
-                  <Link href="/case-studies/transcribatron">
-                    <Button variant="white">
-                      <ArrowRight />
-                      View Case Study
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
-            </div>
-          </div>
+            <motion.div
+              className="pt-6"
+              initial={{ opacity: 0 }}
+              animate={typingDone ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.4 }}
+            >
+              <Link href="/case-study">
+                <Button variant="white-outline" className="w-full">
+                  See All Case Studies <ArrowRight />
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
 

@@ -1,39 +1,52 @@
 import NavBar from "@/components/ui/NavBar"
 import TrustStatement from "@/components/TrustStatement"
 import ServicesApproach from "@/components/ServicesApproach"
+import HowWeWork from "@/components/HowWeWork"
 import FadeSection from "@/components/FadeSections"
 import HeroSection from "@/components/HeroSection"
+import JsonLd from "@/components/JsonLd"
+import { schemas } from "@/lib/schemas"
 
 export const metadata = {
-  title: "Slate Studio — Custom Software Development Agency | Kitchener-Waterloo, Ontario",
+  title: "Pontera Studios — Custom Software & Web Development",
   description:
-    "Custom software development agency in Kitchener-Waterloo, Ontario. We build web apps, websites, iOS apps, integrations, and automation. No templates, no shortcuts.",
+    "Custom software development and web development studio in the Waterloo Region, Ontario. Full-stack applications, websites, AI integration, and automation.",
   openGraph: {
-    title: "Slate Studio — Custom Software Development | Kitchener-Waterloo",
+    title: "Pontera Studios — Custom Software & Web Development",
     description:
-      "Software agency in Kitchener-Waterloo building custom web apps, mobile apps, integrations, and automation for growing businesses.",
+      "Custom software development and web development studio in the Waterloo Region, Ontario.",
   },
   alternates: {
-    canonical: "https://slatecode.dev",
+    canonical: "https://www.ponterastudios.com",
   },
 }
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <NavBar agencyName="Slate Studio" />
+      <JsonLd data={schemas.localBusiness} />
+      <NavBar agencyName="Pontera Studios" />
 
       <FadeSection>
-        <HeroSection />
+        <HeroSection mobileInsert={
+          <>
+            <TrustStatement />
+            <ServicesApproach />
+          </>
+        } />
       </FadeSection>
 
-      <FadeSection>
-        <TrustStatement />
-      </FadeSection>
+      <div className="hidden xl:block">
+        <FadeSection>
+          <TrustStatement />
+        </FadeSection>
 
-      <FadeSection>
-        <ServicesApproach />
-      </FadeSection>
+        <FadeSection>
+          <ServicesApproach />
+        </FadeSection>
+      </div>
+
+      <HowWeWork />
     </div>
   )
 }

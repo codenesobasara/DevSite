@@ -23,7 +23,7 @@ export function getAllPosts() {
         title: data.title || slug,
         date: data.date || null,
         description: data.description || "",
-        author: data.author || "Slate Studio",
+        author: data.author || "Pontera Studios",
       }
     })
     .sort((a, b) => {
@@ -50,7 +50,7 @@ export async function getPostBySlug(slug) {
     title: data.title || slug,
     date: data.date || null,
     description: data.description || "",
-    author: data.author || "Slate Studio",
+    author: data.author || "Pontera Studios",
     contentHtml,
   }
 }
