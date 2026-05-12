@@ -17,6 +17,6 @@ Pontera Studios is a boutique software development agency. We build custom web a
 
 ## Contact
 
-- Website: https://slatecode.dev
-- Contact: https://slatecode.dev/contact
+- Website: https://www.ponterastudios.com
+- Contact: https://www.ponterastudios.com/contact
 - Location: Waterloo Region, Ontario, Canada

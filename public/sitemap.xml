@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://slatecode.dev/</loc>
+    <loc>https://www.ponterastudios.com/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services</loc>
+    <loc>https://www.ponterastudios.com/services</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services/web-apps</loc>
+    <loc>https://www.ponterastudios.com/services/web-apps</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services/custom-websites</loc>
+    <loc>https://www.ponterastudios.com/services/custom-websites</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services/landing-pages</loc>
+    <loc>https://www.ponterastudios.com/services/landing-pages</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services/seo</loc>
+    <loc>https://www.ponterastudios.com/services/seo</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services/ios</loc>
+    <loc>https://www.ponterastudios.com/services/ios</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services/integrations</loc>
+    <loc>https://www.ponterastudios.com/services/integrations</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/services/automation</loc>
+    <loc>https://www.ponterastudios.com/services/automation</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/case-study</loc>
+    <loc>https://www.ponterastudios.com/case-study</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/case-study/focuspoint</loc>
+    <loc>https://www.ponterastudios.com/case-study/focuspoint</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/case-study/basara</loc>
+    <loc>https://www.ponterastudios.com/case-study/basara</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/case-study/medleads</loc>
+    <loc>https://www.ponterastudios.com/case-study/medleads</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/case-study/transcribatron</loc>
+    <loc>https://www.ponterastudios.com/case-study/transcribatron</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://slatecode.dev/contact</loc>
+    <loc>https://www.ponterastudios.com/contact</loc>
     <priority>0.8</priority>
   </url>
 </urlset>

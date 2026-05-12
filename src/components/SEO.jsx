@@ -1,7 +1,8 @@
 import { Helmet } from 'react-helmet-async'
 
 const SITE_NAME = 'Pontera Studios'
-const BASE_URL = 'https://slatecode.dev'
+const BASE_URL = 'https://www.ponterastudios.com'
+const OG_IMAGE = `${BASE_URL}/images/og-image.png`
 
 function SEO({ title, description, path = '/', schema }) {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Custom Software & Web Development`
@@ -19,11 +20,13 @@ function SEO({ title, description, path = '/', schema }) {
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
       <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:image" content={OG_IMAGE} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={OG_IMAGE} />
 
       {/* Structured Data */}
       {schema && (
