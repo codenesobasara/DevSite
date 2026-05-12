@@ -135,9 +135,9 @@ function HeroSection({ mobileInsert }) {
       <main className="hidden xl:block w-full px-8 pt-28">
         <div className="grid grid-cols-2 items-start gap-[3vw]">
           <div>
-            <h1 className="text-[5vw] font-medium tracking-tight leading-[1.05] pt-10 pl-15 whitespace-pre-line">
+            <p className="text-[5vw] font-medium tracking-tight leading-[1.05] pt-10 pl-15 whitespace-pre-line" aria-hidden="true">
               {displayedText}
-            </h1>
+            </p>
           </div>
 
           <motion.div

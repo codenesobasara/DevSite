@@ -19,7 +19,7 @@ function ContactModal() {
   const [submitted, setSubmitted] = useState(false)
   const openedAt = useRef(0)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const form = e.target
 
@@ -29,7 +29,22 @@ function ContactModal() {
     // Timing — reject if submitted faster than 3 seconds
     if (Date.now() - openedAt.current < 3000) return
 
-    // TODO: wire up to backend
+    try {
+      const res = await fetch("https://api.ponterastudios.com/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.elements.name.value,
+          email: form.elements.email.value,
+          company: form.elements.company.value || null,
+          service: selectedService || null,
+          message: form.elements.message.value || null,
+        }),
+      })
+      if (!res.ok) throw new Error("Request failed")
+    } catch {
+      // Still show success to user — don't leak backend errors
+    }
     setSubmitted(true)
   }
 

@@ -159,7 +159,6 @@ export default function ContactContent() {
                   <textarea
                     id="c-message"
                     name="message"
-                    required
                     rows={5}
                     value={form.message}
                     onChange={handleChange}
