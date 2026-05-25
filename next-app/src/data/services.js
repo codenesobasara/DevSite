@@ -3,7 +3,7 @@ export const services = [
     id: 0,
     name: "Strategy",
     description:
-      "Every project starts with a conversation. We take the time to understand your business, how it runs, where it's headed and what's getting in the way. From there we build a clear plan around your goals and implement software or web solutions to help you get acheive those goals",
+      "Every project starts with a conversation. We take the time to understand your business, how it runs, where it's headed and what's getting in the way. From there we build a clear plan around your goals and implement software or web solutions to help you achieve those goals",
   },
   {
     id: 1,

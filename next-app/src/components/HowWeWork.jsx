@@ -8,28 +8,28 @@ const steps = [
     number: "01",
     title: "Discovery Call",
     description:
-      "We start with a conversation. You tell us what you're trying to solve, we ask the right questions, and we figure out together whether we're the right fit.",
+      "We start with a discovery call, learn more about your project, and put together a comprehensive plan.",
     icon: MessageCircle,
   },
   {
     number: "02",
     title: "Scope & Plan",
     description:
-      "We break down the project into clear deliverables with timelines and costs. No surprises, no scope creep. You know exactly what you're getting before we write a line of code.",
+      "We break down the project into clear deliverables, research our market, and put together an implementation plan.",
     icon: ClipboardList,
   },
   {
     number: "03",
     title: "Build",
     description:
-      "Our senior developers build your project from scratch. You get regular updates and access to a staging environment so you can see progress in real time.",
+      "We build your project from scratch. You get regular updates and access to a staging environment so you can see progress in real time.",
     icon: Code,
   },
   {
     number: "04",
     title: "Handoff",
     description:
-      "We deploy, walk you through everything, and hand over full ownership. Your code, your infrastructure, your project. We stick around for support if you need us.",
+      "We deploy, walk you through everything, and hand over full ownership. Your code, your infrastructure, your project.",
     icon: Rocket,
   },
 ]
