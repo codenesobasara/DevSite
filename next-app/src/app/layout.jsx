@@ -1,7 +1,6 @@
 import "./globals.css"
 import { DrawerProvider } from "@/context/DrawerContext"
 import ContactDrawer from "@/components/ContactDrawer"
-import ChatWidget from "@/components/ui/ChatWidget"
 
 export const metadata = {
   metadataBase: new URL("https://www.ponterastudios.com"),
@@ -27,7 +26,11 @@ export const metadata = {
     canonical: "https://www.ponterastudios.com",
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.png", type: "image/png", sizes: "64x64" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
 }
 
@@ -41,7 +44,6 @@ export default function RootLayout({ children }) {
         <DrawerProvider>
           {children}
           <ContactDrawer />
-          <ChatWidget />
         </DrawerProvider>
       </body>
     </html>
