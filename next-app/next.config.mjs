@@ -23,12 +23,13 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.cal.com https://vercel.live",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.cal.com https://vercel.live https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline'",
               "font-src 'self'",
               "img-src 'self' data: https:",
               "frame-src https://cal.com https://app.cal.com",
-              "connect-src 'self' https://api.ponterastudios.com https://vercel.live",
+              // *.google-analytics.com covers GA4's regional collect endpoints.
+              "connect-src 'self' https://api.ponterastudios.com https://vercel.live https://www.googletagmanager.com https://*.google-analytics.com",
             ].join("; "),
           },
         ],

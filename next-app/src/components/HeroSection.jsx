@@ -1,8 +1,4 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+﻿import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -42,59 +38,52 @@ const caseStudies = [
   },
 ]
 
-const FULL_TEXT = "Build Something Great\nFor Your Business"
-const TYPE_SPEED = 40
+const HEADLINE = "Build Something Great\nFor Your Business"
+const WORD_STAGGER_MS = 70
+
+// Renders the headline as real static text, split into per-word spans that fade
+// in sequentially via CSS. The full text is always present in the DOM.
+function StaggeredHeadline() {
+  let wordIndex = 0
+  return HEADLINE.split("\n").map((line, lineIndex) => (
+    <span key={lineIndex} className="block">
+      {line.split(" ").map((word, i) => {
+        const delay = wordIndex * WORD_STAGGER_MS
+        wordIndex += 1
+        return (
+          <span
+            key={i}
+            className="hero-word"
+            style={{ "--delay": `${delay}ms` }}
+          >
+            {word}{" "}
+          </span>
+        )
+      })}
+    </span>
+  ))
+}
 
 function HeroSection({ mobileInsert }) {
-  const [charCount, setCharCount] = useState(0)
-  const typingDone = charCount >= FULL_TEXT.length
-
-  useEffect(() => {
-    let i = 0
-    const interval = setInterval(() => {
-      i++
-      setCharCount(i)
-      if (i >= FULL_TEXT.length) {
-        clearInterval(interval)
-      }
-    }, TYPE_SPEED)
-    return () => clearInterval(interval)
-  }, [])
-
-  const displayedText = FULL_TEXT.slice(0, charCount)
-
   return (
     <>
       {/* Mobile / Tablet layout (up to xl) */}
       <main className="block xl:hidden w-full px-4 pt-24 phone-ls:pt-16 pb-8 phone-ls:pb-4">
         <div className="flex flex-col phone-ls:flex-row phone-ls:items-start gap-4 phone-ls:gap-6">
           <div className="px-2 sm:px-4 phone-ls:flex-1">
-            <h1 className="text-[8vw] sm:text-[6vw] md:text-[5vw] phone-ls:text-[4vw] font-medium tracking-tight leading-[1.05] whitespace-pre-line">
-              {displayedText}
+            <h1 className="text-[8vw] sm:text-[6vw] md:text-[5vw] phone-ls:text-[4vw] font-medium tracking-tight leading-[1.05]">
+              <StaggeredHeadline />
             </h1>
-            {typingDone && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-                className="text-white/50 text-sm sm:text-base mt-4 phone-ls:mt-2 max-w-md"
-              >
-                Custom software, web platforms, and AI integration for growing businesses.
-              </motion.p>
-            )}
+            <p className="hero-reveal text-white/50 text-sm sm:text-base mt-4 phone-ls:mt-2 max-w-md" style={{ "--delay": "350ms" }}>
+              Web design, custom software, and AI integration for growing businesses in Kitchener-Waterloo.
+            </p>
           </div>
 
-          {typingDone && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="px-2 sm:px-4 phone-ls:flex-1"
-          >
+          <div className="hero-reveal px-2 sm:px-4 phone-ls:flex-1" style={{ "--delay": "450ms" }}>
             <div className="flex items-center justify-between mb-5 phone-ls:mb-3">
               <h2 className="text-lg sm:text-xl font-medium">Our Work</h2>
-              <Link href="/case-study" className="text-white/40 text-xs hover:text-white transition-colors">
-                View All →
+              <Link href="/case-study" className="text-white/60 text-xs hover:text-white transition-colors">
+                View All â†’
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:max-w-md md:mx-auto">
@@ -105,7 +94,7 @@ function HeroSection({ mobileInsert }) {
                   className="group"
                 >
                   <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-4 sm:p-5 md:p-4 aspect-square md:aspect-[4/3] phone-ls:aspect-[4/3] flex flex-col justify-between transition-all duration-200 group-hover:border-white/25">
-                    <p className="text-white/40 text-[11px] sm:text-xs leading-snug">
+                    <p className="text-white/60 text-[11px] sm:text-xs leading-snug">
                       {study.brief}
                     </p>
                     <span className="text-white font-medium text-sm sm:text-base md:text-sm leading-tight">
@@ -115,18 +104,12 @@ function HeroSection({ mobileInsert }) {
                 </Link>
               ))}
             </div>
-          </motion.div>
-          )}
+          </div>
 
-          {typingDone && mobileInsert && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-              className="flex flex-col gap-4"
-            >
+          {mobileInsert && (
+            <div className="hero-reveal flex flex-col gap-4" style={{ "--delay": "550ms" }}>
               {mobileInsert}
-            </motion.div>
+            </div>
           )}
         </div>
       </main>
@@ -135,24 +118,18 @@ function HeroSection({ mobileInsert }) {
       <main className="hidden xl:block w-full px-8 pt-28">
         <div className="grid grid-cols-2 items-start gap-[3vw]">
           <div>
-            <p className="text-[5vw] font-medium tracking-tight leading-[1.05] pt-10 pl-15 whitespace-pre-line" aria-hidden="true">
-              {displayedText}
+            <p className="text-[5vw] font-medium tracking-tight leading-[1.05] pt-10 pl-15" aria-hidden="true">
+              <StaggeredHeadline />
             </p>
           </div>
 
-          <motion.div
-            className="pt-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={typingDone ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
+          <div className="pt-16">
             <div className="grid grid-cols-2 gap-[1.5vw]">
               {caseStudies.filter(s => s.slug === "focuspoint" || s.slug === "medleads").map((study, i) => (
-                <motion.div
+                <div
                   key={study.slug}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={typingDone ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.15 * i }}
+                  className="hero-reveal"
+                  style={{ "--delay": `${150 + i * 150}ms` }}
                 >
                   <Card>
                     <div className="aspect-video overflow-hidden">
@@ -175,22 +152,17 @@ function HeroSection({ mobileInsert }) {
                       </Link>
                     </CardFooter>
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
-            <motion.div
-              className="pt-6"
-              initial={{ opacity: 0 }}
-              animate={typingDone ? { opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.4 }}
-            >
+            <div className="hero-reveal pt-6" style={{ "--delay": "450ms" }}>
               <Link href="/case-study">
                 <Button variant="white-outline" className="w-full">
                   See All Case Studies <ArrowRight />
                 </Button>
               </Link>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </main>
     </>

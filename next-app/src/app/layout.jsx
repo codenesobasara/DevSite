@@ -1,4 +1,5 @@
 import "./globals.css"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import { DrawerProvider } from "@/context/DrawerContext"
 import ContactDrawer from "@/components/ContactDrawer"
 
@@ -45,6 +46,7 @@ export default function RootLayout({ children }) {
           {children}
           <ContactDrawer />
         </DrawerProvider>
+        <GoogleAnalytics gaId="G-YQD14C49NW" />
       </body>
     </html>
   )

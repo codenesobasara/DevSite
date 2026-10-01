@@ -14,9 +14,9 @@ function CustomWebsitesPage({ service, relatedServices, otherCategories }) {
         {service.category}
       </p>
 
-      <h1 className="sr-only">Custom Website Development in Kitchener-Waterloo</h1>
+      <h1 className="sr-only">Web Design Company in Kitchener-Waterloo</h1>
       <p className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4" aria-hidden="true">
-        Custom Website Development
+        Web Design &amp; Development
       </p>
       <p className="text-xl xl:text-2xl text-white/70 mb-12">
         Your business deserves more than a template. We build websites from

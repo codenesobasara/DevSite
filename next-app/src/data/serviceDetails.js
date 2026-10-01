@@ -18,10 +18,10 @@ export const serviceCategories = [
       },
       {
         id: "custom-websites",
-        title: "Custom Website Development",
+        title: "Web Design & Development",
         headline: "Your business deserves more than a template.",
         description:
-          "Every website we build is designed and coded from scratch. We don't use WordPress, Wix, or any page builders. The result is a site that's fast, unique to your brand, and built to grow with your business. You own everything when we're done.",
+          "Web design and development in Kitchener-Waterloo, built from scratch. We don't use WordPress, Wix, or any page builders. The result is a site that's fast, unique to your brand, and built to grow with your business. You own everything when we're done.",
         highlights: [
           "Fully custom design and development",
           "Mobile responsive across all devices",
@@ -44,12 +44,13 @@ export const serviceCategories = [
       },
       {
         id: "seo",
-        title: "SEO & Web Optimization",
+        title: "SEO Services for Small Business",
         headline: "Get found by the people who are looking for you.",
         description:
-          "We handle technical SEO, on-page optimization, and site performance tuning. Whether you need a full SEO strategy or just need your existing site cleaned up so Google can actually find it, we dig into the details and make it work.",
+          "SEO services for small businesses in Kitchener-Waterloo. Technical SEO, local SEO, and on-page optimization that gets you found by the customers already searching for what you do.",
         highlights: [
           "Technical SEO audits",
+          "Local SEO and Google Business Profile",
           "On-page optimization",
           "Site speed and Core Web Vitals",
           "Search Console and analytics setup",

@@ -232,9 +232,9 @@ function SEOPage({ service, relatedServices, otherCategories }) {
         {service.category}
       </p>
 
-      <h1 className="sr-only">SEO &amp; Web Optimization in Kitchener-Waterloo</h1>
+      <h1 className="sr-only">SEO Services for Small Business in Kitchener-Waterloo</h1>
       <p className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4" aria-hidden="true">
-        SEO &amp; Web Optimization
+        SEO for Small Business
       </p>
       <p className="text-xl xl:text-2xl text-white/70 mb-8">
         Get found by the people who are already looking for what you do. We

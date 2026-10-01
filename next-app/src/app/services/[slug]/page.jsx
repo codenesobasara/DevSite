@@ -31,10 +31,10 @@ export function generateMetadata({ params }) {
   const service = getServiceBySlug(params.slug)
   if (!service) return {}
   return {
-    title: service.title,
+    title: `${service.title} in Kitchener-Waterloo`,
     description: service.description,
     openGraph: {
-      title: `${service.title} | Pontera Studios`,
+      title: `${service.title} in Kitchener-Waterloo | Pontera Studios`,
       description: service.description,
     },
     alternates: {

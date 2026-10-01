@@ -14,7 +14,7 @@ function IntegrationsPage({ service, relatedServices, otherCategories }) {
         AI, Integrations &amp; Automation
       </p>
 
-      <h1 className="sr-only">AI Integration &amp; Automation in Kitchener-Waterloo</h1>
+      <h1 className="sr-only">{service.title} in Kitchener-Waterloo</h1>
       <p className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4" aria-hidden="true">
         AI Integration &amp; Automation
       </p>
