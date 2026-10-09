@@ -29,7 +29,7 @@ const nextConfig = {
               "img-src 'self' data: https:",
               "frame-src https://cal.com https://app.cal.com",
               // *.google-analytics.com covers GA4's regional collect endpoints.
-              "connect-src 'self' https://api.ponterastudios.com https://vercel.live https://www.googletagmanager.com https://*.google-analytics.com",
+              "connect-src 'self' https://vercel.live https://www.googletagmanager.com https://*.google-analytics.com",
             ].join("; "),
           },
         ],

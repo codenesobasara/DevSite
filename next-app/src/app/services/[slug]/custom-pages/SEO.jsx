@@ -30,7 +30,7 @@ function SEOReportModal({ isOpen, onClose }) {
       if (website && !/^https?:\/\//i.test(website)) {
         website = "https://" + website
       }
-      const res = await fetch("https://api.ponterastudios.com/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
