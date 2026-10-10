@@ -4,17 +4,14 @@ import ServicesApproach from "@/components/ServicesApproach"
 import HowWeWork from "@/components/HowWeWork"
 import FadeSection from "@/components/FadeSections"
 import HeroSection from "@/components/HeroSection"
-import JsonLd from "@/components/JsonLd"
-import { schemas } from "@/lib/schemas"
-
 export const metadata = {
-  title: "Pontera Studios — Custom Software & Web Development",
+  title: "Web Design & Custom Software in Kitchener-Waterloo | Pontera Studios",
   description:
-    "Custom software development and web development studio in the Waterloo Region, Ontario. Full-stack applications, websites, AI integration, and automation.",
+    "Custom web design and software development studio serving Kitchener, Waterloo, Cambridge and Guelph. Websites, full-stack applications, AI integration and automation, all coded from scratch.",
   openGraph: {
-    title: "Pontera Studios — Custom Software & Web Development",
+    title: "Web Design & Custom Software in Kitchener-Waterloo | Pontera Studios",
     description:
-      "Custom software development and web development studio in the Waterloo Region, Ontario.",
+      "Custom web design and software development studio serving Kitchener, Waterloo, Cambridge and Guelph.",
   },
   alternates: {
     canonical: "https://www.ponterastudios.com",
@@ -24,7 +21,6 @@ export const metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <JsonLd data={schemas.localBusiness} />
       <NavBar agencyName="Pontera Studios" />
 
       <FadeSection>

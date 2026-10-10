@@ -69,6 +69,7 @@ function NavBar({ agencyName }) {
             )}
           </li>
           <li><Link href="/case-study" className="text-zinc-400 hover:text-white transition-colors text-sm">Case Studies</Link></li>
+          <li><Link href="/about" className="text-zinc-400 hover:text-white transition-colors text-sm">About</Link></li>
           <li><Link href="/blog" className="text-zinc-400 hover:text-white transition-colors text-sm">Insights</Link></li>
           <li><Link href="/contact" className="text-zinc-400 hover:text-white transition-colors text-sm">Contact</Link></li>
         </ul>
@@ -111,6 +112,7 @@ function NavBar({ agencyName }) {
           )}
 
           <Link href="/case-study" className="py-3 text-zinc-400 hover:text-white text-sm" onClick={() => setIsMenuOpen(false)}>Case Studies</Link>
+          <Link href="/about" className="py-3 text-zinc-400 hover:text-white text-sm" onClick={() => setIsMenuOpen(false)}>About</Link>
           <Link href="/blog" className="py-3 text-zinc-400 hover:text-white text-sm" onClick={() => setIsMenuOpen(false)}>Insights</Link>
           <Link href="/contact" className="py-3 text-zinc-400 hover:text-white text-sm" onClick={() => setIsMenuOpen(false)}>Contact</Link>
           <Button size="sm" className="w-full mt-2" onClick={() => { setIsOpen(true); setIsMenuOpen(false) }}>Let&apos;s Talk</Button>
