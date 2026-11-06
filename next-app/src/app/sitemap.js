@@ -1,5 +1,6 @@
 import { getAllServiceSlugs } from "@/data/serviceDetails"
 import { getAllPosts } from "@/lib/blog"
+import { cityPages } from "@/data/cityPages"
 
 const BASE_URL = "https://www.ponterastudios.com"
 
@@ -19,6 +20,13 @@ export default function sitemap() {
     priority: slug === "ios" ? 0.7 : 0.8,
   }))
 
+  const cityLandingPages = cityPages.map((c) => ({
+    url: `${BASE_URL}/web-design/${c.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }))
+
   const caseStudyPages = ["focuspoint", "jasonhartog", "basara", "medleads", "transcribatron"].map((slug) => ({
     url: `${BASE_URL}/case-study/${slug}`,
     lastModified: new Date(),
@@ -33,5 +41,5 @@ export default function sitemap() {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...servicePages, ...caseStudyPages, ...blogPages]
+  return [...staticPages, ...servicePages, ...cityLandingPages, ...caseStudyPages, ...blogPages]
 }

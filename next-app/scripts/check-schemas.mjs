@@ -25,3 +25,18 @@ for (const m of kw.mainEntity) {
   assert.ok(!/\$\s?\d/.test(m.acceptedAnswer.text), `price in answer: ${m.name}`)
 }
 console.log("check-schemas faq ok")
+
+// City pages: unknown slug is null; each city has 4 FAQs and real case-study proof
+import { cityPages, getCityBySlug } from "../src/data/cityPages.js"
+assert.equal(getCityBySlug("cambridge"), null)
+assert.ok(cityPages.length >= 2)
+for (const c of cityPages) {
+  assert.equal(getCityBySlug(c.slug), c)
+  assert.equal(c.faq.length, 4, `faq count ${c.slug}`)
+  assert.ok(c.proof.some((p) => p.href.startsWith("/case-study/")), `proof ${c.slug}`)
+  for (const m of schemas.faq(c.faq).mainEntity) {
+    assert.ok(!/[<&]/.test(m.acceptedAnswer.text), `html in answer: ${c.slug} ${m.name}`)
+    assert.ok(!/\$\s?\d/.test(m.acceptedAnswer.text), `price in answer: ${c.slug} ${m.name}`)
+  }
+}
+console.log("check-schemas cities ok")

@@ -17,3 +17,14 @@ for (const cat of serviceCategories) {
 
 if (bad) process.exit(1)
 console.log("check-seo-meta ok")
+
+// City landing pages
+import { cityPages } from "../src/data/cityPages.js"
+let cityBad = 0
+for (const c of cityPages) {
+  const full = c.title + SUFFIX
+  if (full.length >= 60) { console.error(`TITLE city/${c.slug} ${full.length}: ${full}`); cityBad++ }
+  if (c.description.length >= 160) { console.error(`DESC city/${c.slug} ${c.description.length}`); cityBad++ }
+}
+if (cityBad) process.exit(1)
+console.log("check-seo-meta cities ok")
