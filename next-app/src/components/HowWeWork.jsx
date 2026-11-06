@@ -2,37 +2,10 @@
 
 import { motion } from "framer-motion"
 import { MessageCircle, ClipboardList, Code, Rocket } from "lucide-react"
+import { processSteps } from "@/data/processSteps"
 
-const steps = [
-  {
-    number: "01",
-    title: "Discovery Call",
-    description:
-      "We start with a discovery call, learn more about your project, and put together a comprehensive plan.",
-    icon: MessageCircle,
-  },
-  {
-    number: "02",
-    title: "Scope & Plan",
-    description:
-      "We break down the project into clear deliverables, research our market, and put together an implementation plan.",
-    icon: ClipboardList,
-  },
-  {
-    number: "03",
-    title: "Build",
-    description:
-      "We build your project from scratch. You get regular updates and access to a staging environment so you can see progress in real time.",
-    icon: Code,
-  },
-  {
-    number: "04",
-    title: "Handoff",
-    description:
-      "We deploy, walk you through everything, and hand over full ownership. Your code, your infrastructure, your project.",
-    icon: Rocket,
-  },
-]
+const ICONS = { "01": MessageCircle, "02": ClipboardList, "03": Code, "04": Rocket }
+const steps = processSteps.map((s) => ({ ...s, icon: ICONS[s.number] }))
 
 function HowWeWork() {
   return (

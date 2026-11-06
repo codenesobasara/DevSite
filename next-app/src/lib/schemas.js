@@ -28,7 +28,7 @@ export const schemas = {
     priceRange: '$$',
   },
 
-  service(name, description, url) {
+  service(name, description, url, areaServed) {
     return {
       '@context': 'https://schema.org',
       '@type': 'Service',
@@ -39,10 +39,24 @@ export const schemas = {
         '@type': 'Organization',
         name: 'Pontera Studios',
       },
-      areaServed: {
-        '@type': 'Place',
-        name: 'Kitchener-Waterloo, Ontario, Canada',
-      },
+      areaServed: areaServed
+        ? { '@type': 'City', name: areaServed }
+        : {
+            '@type': 'Place',
+            name: 'Kitchener-Waterloo, Ontario, Canada',
+          },
+    }
+  },
+
+  faq(items) {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: items.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
     }
   },
 
