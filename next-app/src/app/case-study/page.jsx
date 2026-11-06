@@ -15,6 +15,15 @@ const caseStudies = [
       "A dual-market portfolio and lead generation platform for a commercial photography studio. Custom CMS, CRM integration, embedded booking, and global edge deployment.",
   },
   {
+    slug: "jasonhartog",
+    title: "Jason Hartog Photography",
+    tagline: "A Guelph photographer's portfolio, managed without a developer",
+    category: "Web Platform",
+    image: "/images/jasonhartog-hero.webp",
+    summary:
+      "A portfolio site for a Guelph architectural photographer: Sanity-managed galleries, responsive images from a global CDN, a contact form wired into HubSpot, and edge deployment on Cloudflare.",
+  },
+  {
     slug: "basara",
     title: "Basara",
     tagline: "Hyperlocal real estate market intelligence for the Waterloo Region",

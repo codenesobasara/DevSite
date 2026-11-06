@@ -19,7 +19,7 @@ export default function sitemap() {
     priority: slug === "ios" ? 0.7 : 0.8,
   }))
 
-  const caseStudyPages = ["focuspoint", "basara", "medleads", "transcribatron"].map((slug) => ({
+  const caseStudyPages = ["focuspoint", "jasonhartog", "basara", "medleads", "transcribatron"].map((slug) => ({
     url: `${BASE_URL}/case-study/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
