@@ -40,3 +40,19 @@ for (const c of cityPages) {
   }
 }
 console.log("check-schemas cities ok")
+
+// Final-review fixes: real link for the SEO FAQ, no verbatim FAQ reuse across pages,
+// per-city subheads, no invented travel times or unsupported product claims
+const seoItem = customWebsitesFaq.find((i) => /SEO/.test(i.q))
+assert.ok(seoItem.link && seoItem.link.href === "/services/seo", "seo faq must carry a link to /services/seo")
+assert.ok(!/\/services\//.test(seoItem.a), "raw path in seo answer")
+const answers = [...customWebsitesFaq, ...cityPages.flatMap((c) => c.faq)].map((i) => i.a)
+assert.equal(new Set(answers).size, answers.length, "duplicate FAQ answer across pages")
+assert.ok(cityPages.every((c) => typeof c.subhead === "string" && c.subhead.length > 40), "city subhead")
+assert.equal(new Set(cityPages.map((c) => c.subhead)).size, cityPages.length, "subheads must differ")
+for (const c of cityPages) {
+  const text = [...c.intro, ...c.localNotes, ...c.faq.map((i) => i.a), ...c.proof.map((p) => p.result)].join(" ")
+  assert.ok(!/\b(twenty|\d+)\s+minutes\b/i.test(text), `travel time claim in ${c.slug}`)
+  assert.ok(!/no cloud dependency/i.test(text), `unsupported cloud claim in ${c.slug}`)
+}
+console.log("check-schemas review-fixes ok")

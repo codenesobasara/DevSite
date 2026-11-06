@@ -66,10 +66,7 @@ export default function CityWebDesignPage({ params }) {
           Web Development
         </p>
         <h1 className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4">{city.h1}</h1>
-        <p className="text-xl xl:text-2xl text-white/70 mb-8">
-          Custom-coded websites for {city.city} businesses. Fast, built to rank,
-          and yours to own.
-        </p>
+        <p className="text-xl xl:text-2xl text-white/70 mb-8">{city.subhead}</p>
 
         <section className="mb-10 xl:mb-16">
           <div className="text-white/60 text-base xl:text-lg leading-relaxed space-y-4 max-w-3xl">

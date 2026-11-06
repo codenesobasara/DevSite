@@ -4,6 +4,7 @@ export const cityPages = [
     city: "Waterloo",
     h1: "Web Design in Waterloo",
     title: "Web Design Waterloo",
+    subhead: "Custom-coded websites for Waterloo businesses and product companies, built in Waterloo Region. Fast, built to rank, and yours to own.",
     description:
       "Custom-coded websites for Waterloo businesses, built in Waterloo Region. Fast, built to rank, and yours to own. No templates, no lock-in.",
     intro: [
@@ -20,7 +21,7 @@ export const cityPages = [
       },
       {
         title: "Transcribatron",
-        result: "Native iOS app with on-device transcription, designed and built in Waterloo Region. Keyboard extension, meeting intelligence, no cloud dependency.",
+        result: "Native iOS app designed and built in Waterloo Region. On-device transcription, so audio never leaves the phone, with a keyboard extension and meeting intelligence.",
         href: "/case-study/transcribatron",
         image: "/images/transcribeAtron.webp",
         alt: "Transcribatron iOS app",
@@ -34,11 +35,11 @@ export const cityPages = [
     faq: [
       {
         q: "What does a website cost in Waterloo?",
-        a: "There is no fixed menu. The price depends on page count, whether you want a CMS to edit content yourself, which systems the site connects to, and who writes the content. Every project is scoped on a discovery call and quoted as a single project fee, with no monthly licence fees after handoff.",
+        a: "There is no fixed menu. A marketing site for a Waterloo product company is scoped differently from a site for a clinic or a trades business: page count, whether you want a CMS, which systems the site connects to, and who writes the content all move the number. Every project is scoped on a discovery call and quoted as a single project fee, with no monthly licence fees after handoff.",
       },
       {
         q: "How long does it take?",
-        a: "A typical small business site takes 4 to 8 weeks from kickoff to launch. Larger builds with a CMS, integrations or many pages are scoped individually. You get a staging link during the build so you can see progress before anything goes live.",
+        a: "A typical small business site takes 4 to 8 weeks from kickoff to launch. A startup marketing site that has to be live for a launch or an announcement usually sits at the short end of that; builds with a CMS, integrations or many pages are scoped individually. You get a staging link during the build so your team can review progress before anything goes live.",
       },
       {
         q: "Do you work with Waterloo startups and tech companies?",
@@ -46,7 +47,7 @@ export const cityPages = [
       },
       {
         q: "Who owns the site?",
-        a: "You do. The code, the hosting account and the domain are in your name when we hand off. There is no proprietary platform holding your content and no lock-in, so any developer can take over later.",
+        a: "You do. The code, the hosting account and the domain are in your name when we hand off. If you have an in-house developer, or hire one later, they get a normal repository rather than a proprietary platform, and they can take over without us.",
       },
     ],
   },
@@ -55,10 +56,11 @@ export const cityPages = [
     city: "Guelph",
     h1: "Web Design Company in Guelph",
     title: "Web Design Guelph",
+    subhead: "Custom-coded websites for Guelph studios, trades and small businesses, from a Waterloo Region studio a short drive away. Fast, built to rank, and yours to own.",
     description:
       "Custom websites for Guelph businesses from a Waterloo Region studio. Hand-coded, fast, built to rank, and yours to own after handoff.",
     intro: [
-      "Pontera Studios is a web design and development studio in Waterloo Region, twenty minutes down the road from Guelph. We hand-code every site, pre-render every page, and hand over the code, hosting account and domain when the work is done.",
+      "Pontera Studios is a web design and development studio in Waterloo Region, a short drive from Guelph. We hand-code every site, pre-render every page, and hand over the code, hosting account and domain when the work is done.",
       "Two of our client sites are Guelph studios: Jason Hartog Photography and Focus Point Media. Both are image-heavy portfolio sites that the owners now manage themselves, without a developer.",
     ],
     proof: [
@@ -85,19 +87,19 @@ export const cityPages = [
     faq: [
       {
         q: "What does a website cost in Guelph?",
-        a: "There is no fixed menu. The price depends on page count, whether you want a CMS to edit content yourself, which systems the site connects to, and who writes the content. Every project is scoped on a discovery call and quoted as a single project fee, with no monthly licence fees after handoff.",
+        a: "There is no fixed menu. The two Guelph sites we have built were image-heavy portfolios with a CMS, which is a different scope from a five-page site for a trades business or a clinic. Page count, whether you want a CMS, which systems the site connects to, and who writes the content all move the number. Every project is scoped on a discovery call and quoted as a single project fee, with no monthly licence fees after handoff.",
       },
       {
         q: "How long does it take?",
-        a: "A typical small business site takes 4 to 8 weeks from kickoff to launch. Larger builds with a CMS, integrations or many pages are scoped individually. You get a staging link during the build so you can see progress before anything goes live.",
+        a: "A typical small business site takes 4 to 8 weeks from kickoff to launch. A portfolio site with a CMS, like the Guelph studios we have built for, usually sits at the longer end because gallery content takes time to prepare. You get a staging link during the build so you can review progress before anything goes live.",
       },
       {
         q: "Do you come to Guelph for meetings?",
-        a: "Yes, when it helps. We are based in Waterloo Region, about twenty minutes away, so a kickoff or a launch walkthrough in person is easy to arrange. Most of the day-to-day during a build happens over a shared staging link and short calls.",
+        a: "Yes, when it helps. We are based in Waterloo Region, a short drive away, so a kickoff or a launch walkthrough in person is easy to arrange. Most of the day-to-day during a build happens over a shared staging link and short calls.",
       },
       {
         q: "Who owns the site?",
-        a: "You do. The code, the hosting account and the domain are in your name when we hand off. There is no proprietary platform holding your content and no lock-in, so any developer can take over later.",
+        a: "You do. The code, the hosting account and the domain are in your name when we hand off. Both Guelph sites we built are run day to day by their owners from a CMS, and if either ever wanted another developer to take over, nothing in the setup would stop them.",
       },
     ],
   },

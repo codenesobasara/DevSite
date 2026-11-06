@@ -21,6 +21,7 @@ export const customWebsitesFaq = [
   },
   {
     q: "Is SEO included?",
-    a: "Technical SEO is part of every build: clean page structure, fast load times, structured data, and Google Search Console set up and verified before launch. Ongoing SEO work such as content, local listings and link building is a separate service, which you can read about under SEO Services at /services/seo.",
+    a: "Technical SEO is part of every build: clean page structure, fast load times, structured data, and Google Search Console set up and verified before launch. Ongoing SEO work such as content, local listings and link building is a separate service.",
+    link: { href: "/services/seo", label: "Read about our SEO services" },
   },
 ]
