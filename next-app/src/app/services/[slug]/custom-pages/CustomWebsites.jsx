@@ -1,200 +1,105 @@
-"use client"
-
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useDrawer } from "@/context/DrawerContext"
+import TalkButton from "@/components/local/TalkButton"
+import ProofCard from "@/components/local/ProofCard"
+import ProcessSteps from "@/components/local/ProcessSteps"
+import IncludedGrid from "@/components/local/IncludedGrid"
+import FaqSection from "@/components/local/FaqSection"
+import { customWebsitesFaq } from "@/data/customWebsitesFaq"
+
+const proof = [
+  {
+    title: "Basara",
+    result: "Kitchener-Waterloo real estate platform: 7 cities, 50+ neighbourhoods, runs for under $25 a month.",
+    href: "/case-study/basara",
+    image: "/images/basara-hero.webp",
+    alt: "Basara real estate platform website",
+  },
+  {
+    title: "Focus Point Media",
+    result: "Photography studio rebuilt off WordPress: SEO score 5.5 to 10.0, broken pages 6 to 0.",
+    href: "/case-study/focuspoint",
+    image: "/images/focuspoint-hero.webp",
+    alt: "Focus Point Media website",
+  },
+  {
+    title: "Jason Hartog Photography",
+    result: "Guelph photographer's portfolio: CMS-managed galleries, edge-deployed, form straight into the CRM.",
+    href: "/case-study/jasonhartog",
+    image: "/images/jasonhartog-hero.webp",
+    alt: "Jason Hartog Photography website",
+  },
+]
 
 function CustomWebsitesPage({ service, relatedServices, otherCategories }) {
-  const { setIsOpen } = useDrawer()
-
   return (
     <>
       <p className="text-white/40 text-sm uppercase tracking-wider mb-2">
         {service.category}
       </p>
 
-      <h1 className="sr-only">Web Design Company in Kitchener-Waterloo</h1>
-      <p className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4" aria-hidden="true">
-        Web Design &amp; Development
-      </p>
+      <h1 className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4">
+        Web Design Company in Kitchener-Waterloo
+      </h1>
       <p className="text-xl xl:text-2xl text-white/70 mb-12">
-        Your business deserves more than a template. We build websites from
-        scratch that are fast, rankable, and yours to own.
+        Custom-coded websites for businesses in Waterloo Region. Fast, built to
+        rank, and yours to own.
       </p>
 
       <section className="mb-10 xl:mb-16">
-        <h2 className="text-2xl xl:text-3xl font-medium mb-6">
-          What is a custom website?
-        </h2>
-        <div className="text-white/60 text-base xl:text-lg leading-relaxed space-y-4">
-          <p>
-            A custom website is one that&apos;s designed and coded specifically for
-            your business. There&apos;s no pre-built theme underneath it. No page
-            builder dragging boxes around. No plugin holding the whole thing
-            together. Every line of code exists because your site needs it, and
-            nothing else.
-          </p>
-          <p>
-            Most websites in the Waterloo Region are built on WordPress with a
-            purchased theme and a stack of plugins. That works for a while, until
-            the theme stops getting updates, a plugin breaks after an update, or
-            your site scores a 40 on Google&apos;s speed test because it&apos;s loading
-            scripts for features you don&apos;t even use.
-          </p>
-          <p>
-            A custom site doesn&apos;t have those problems. It loads only what it
-            needs. It&apos;s built on a modern framework that renders pages in
-            milliseconds instead of seconds. And because there&apos;s no theme or
-            plugin layer between you and the code, everything on the page is
-            intentional.
-          </p>
-        </div>
-      </section>
-
-      <section className="mb-10 xl:mb-16">
-        <h2 className="text-2xl xl:text-3xl font-medium mb-6">
-          How does this differ from WordPress?
-        </h2>
-        <div className="text-white/60 text-base xl:text-lg leading-relaxed space-y-4 mb-10">
-          <p>
-            WordPress powers a lot of the internet. It&apos;s a fine tool for blogs
-            and simple content sites. But when a WordPress site is used as a
-            business platform, the cracks show up fast: slow load times, constant
-            plugin updates, security vulnerabilities, and layouts constrained by
-            whatever the theme allows.
-          </p>
-          <p>
-            Custom websites built on modern web frameworks don&apos;t carry that
-            baggage. There&apos;s no admin panel to hack, no plugins to
-            patch, and no database query running on every page load. The site is
-            pre-built and served from a CDN, which means it loads faster from
-            anywhere in the world.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <div className="p-6 rounded-lg bg-white/[0.03] border border-white/5">
-            <p className="text-white/30 text-xs uppercase tracking-wider mb-4">
-              WordPress
-            </p>
-            <ul className="space-y-3 text-white/50 text-sm">
-              <li>Theme-dependent design with limited flexibility</li>
-              <li>Plugin updates that can break your site overnight</li>
-              <li>Database-driven pages that slow down under traffic</li>
-              <li>Regular security patches required</li>
-              <li>Lighthouse scores typically 40-70 on mobile</li>
-              <li>SEO limited by theme structure and plugin conflicts</li>
-            </ul>
-          </div>
-          <div className="p-6 rounded-lg bg-white/[0.03] border border-white/5">
-            <p className="text-white/30 text-xs uppercase tracking-wider mb-4">
-              Custom Build
-            </p>
-            <ul className="space-y-3 text-white/50 text-sm">
-              <li>Every element designed for your brand and goals</li>
-              <li>No plugins, no theme dependencies, nothing to break</li>
-              <li>Pre-rendered pages served from a global CDN</li>
-              <li>No admin panel to hack, no attack surface</li>
-              <li>Lighthouse scores 90+ on mobile, out of the box</li>
-              <li>SEO built into the architecture, not bolted on</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="mb-10 xl:mb-16">
-        <h2 className="text-2xl xl:text-3xl font-medium mb-6">
-          Why is it worth the investment?
-        </h2>
-        <div className="text-white/60 text-base xl:text-lg leading-relaxed space-y-4">
-          <p>
-            A cheap website costs you twice. Once when you pay for it, and again
-            when you pay to replace it 18 months later because it&apos;s slow, it
-            can&apos;t rank, and it doesn&apos;t represent your business anymore.
-          </p>
-          <p>
-            A custom site compounds in value. It loads fast from day one, which
-            means Google ranks it higher, which means more people find you, which
-            means more leads. The performance advantage isn&apos;t a nice-to-have, it
-            directly affects how much business your site generates.
-          </p>
-          <p>
-            And you own it completely. No license fees, no vendor lock-in, no
-            monthly charges to keep your own site running. When we hand it off,
-            it&apos;s yours. Your code, your hosting, your decision.
-          </p>
-        </div>
-      </section>
-
-      <section className="mb-10 xl:mb-16">
-        <h2 className="text-2xl xl:text-3xl font-medium mb-8">
-          How we build your website
-        </h2>
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-10">
-          <div className="p-6 rounded-lg bg-white/[0.03] border border-white/5">
-            <h3 className="text-lg font-medium mb-3">Modern Frameworks</h3>
-            <p className="text-white/50 text-sm leading-relaxed">
-              We build on modern web frameworks used by some of the largest
-              companies in the world. Server-side rendering for SEO, static
-              generation for speed, and a component architecture that scales
-              with your business.
-            </p>
-          </div>
-          <div className="p-6 rounded-lg bg-white/[0.03] border border-white/5">
-            <h3 className="text-lg font-medium mb-3">Custom Design</h3>
-            <p className="text-white/50 text-sm leading-relaxed">
-              Every page is designed for your brand. No themes, no templates, no
-              dragging boxes around a page builder. Your site looks like your
-              business, not like every other site on the internet.
-            </p>
-          </div>
-          <div className="p-6 rounded-lg bg-white/[0.03] border border-white/5">
-            <h3 className="text-lg font-medium mb-3">CMS & Database Integration</h3>
-            <p className="text-white/50 text-sm leading-relaxed">
-              Need to update your own content? We integrate a headless CMS
-              so you can edit text, images, and pages
-              without touching code. Need structured data? We build the database
-              and the interface to manage it.
-            </p>
-          </div>
-          <div className="p-6 rounded-lg bg-white/[0.03] border border-white/5">
-            <h3 className="text-lg font-medium mb-3">SEO is Not an Add-On</h3>
-            <p className="text-white/50 text-sm leading-relaxed">
-              Every site we build is SEO-optimized from the ground up. Structured
-              data, semantic HTML, proper heading hierarchy, fast load times, and
-              Core Web Vitals performance. There is no point building a site that
-              can&apos;t rank. We don&apos;t treat SEO as a separate service, it&apos;s part of
-              every build.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="mb-10 xl:mb-16">
-        <h2 className="text-2xl xl:text-3xl font-medium mb-6">What&apos;s included</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-          {[
-            "Fully custom design and development",
-            "Mobile responsive across all devices",
-            "Server-side rendering for SEO",
-            "Structured data and schema markup",
-            "Headless CMS integration (optional)",
-            "Performance optimized — 90+ Lighthouse scores",
-            "Security headers and best practices",
-            "Full code ownership on handoff",
-            "Post-launch support",
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-3 p-4 rounded-lg bg-white/[0.03] border border-white/5"
-            >
-              <div className="h-2 w-2 rounded-full bg-white/40 mt-2 shrink-0" />
-              <span className="text-white/70 text-sm">{item}</span>
-            </div>
+        <h2 className="text-2xl xl:text-3xl font-medium mb-6">Recent work</h2>
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          {proof.map((item) => (
+            <ProofCard key={item.href} {...item} />
           ))}
         </div>
       </section>
+
+      <ProcessSteps />
+
+      <IncludedGrid />
+
+      <section className="mb-10 xl:mb-16">
+        <h2 className="text-2xl xl:text-3xl font-medium mb-6">
+          Serving Kitchener, Waterloo, Cambridge and Guelph
+        </h2>
+        <div className="text-white/60 text-base xl:text-lg leading-relaxed space-y-4">
+          <p>
+            <strong className="text-white font-medium">Kitchener.</strong> We
+            work with businesses downtown, in the innovation district and across
+            the city. Basara, the real estate platform we built and run, covers
+            every Kitchener neighbourhood, so we know the market our clients
+            sell into.
+          </p>
+          <p>
+            <strong className="text-white font-medium">Waterloo.</strong> Basara
+            and Transcribatron were both designed and built here. Read more
+            about{" "}
+            <Link href="/web-design/waterloo" className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white">
+              web design in Waterloo
+            </Link>
+            .
+          </p>
+          <p>
+            <strong className="text-white font-medium">Cambridge.</strong> Galt,
+            Preston and Hespeler businesses get the same build-and-handoff
+            model: a hand-coded site you own outright, with no monthly platform
+            fee.
+          </p>
+          <p>
+            <strong className="text-white font-medium">Guelph.</strong> Jason
+            Hartog Photography and Focus Point Media are both Guelph studios we
+            built for. Read more about{" "}
+            <Link href="/web-design/guelph" className="text-white underline underline-offset-4 decoration-white/30 hover:decoration-white">
+              web design in Guelph
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
+      <FaqSection items={customWebsitesFaq} />
 
       <section className="mb-12 xl:mb-20 p-8 rounded-lg bg-white/[0.03] border border-white/5">
         <h2 className="text-xl xl:text-2xl font-medium mb-3">Ready to talk?</h2>
@@ -202,11 +107,9 @@ function CustomWebsitesPage({ service, relatedServices, otherCategories }) {
           Every project starts with a conversation. Tell us what you&apos;re trying
           to build and we&apos;ll tell you honestly whether we&apos;re the right fit.
         </p>
-        <div className="flex gap-4">
-          <Button variant="white" size="lg" onClick={() => setIsOpen(true)}>
-            Let&apos;s Talk <ArrowRight className="h-4 w-4" />
-          </Button>
-          <Link href="/case-study/focuspoint">
+        <div className="flex flex-wrap gap-4">
+          <TalkButton />
+          <Link href="/case-study">
             <Button variant="white-outline" size="lg">
               See Our Work <ArrowRight className="h-4 w-4" />
             </Button>

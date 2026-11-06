@@ -14,3 +14,14 @@ const def = schemas.service("Web Design", "d", "/services/custom-websites")
 assert.equal(def.areaServed.name, "Kitchener-Waterloo, Ontario, Canada")
 
 console.log("check-schemas ok")
+
+// FAQ content hygiene for the Kitchener page
+import { customWebsitesFaq } from "../src/data/customWebsitesFaq.js"
+const kw = schemas.faq(customWebsitesFaq)
+assert.equal(kw.mainEntity.length, 6)
+for (const m of kw.mainEntity) {
+  assert.ok(!/[<&]/.test(m.acceptedAnswer.text), `html in answer: ${m.name}`)
+  assert.ok(m.acceptedAnswer.text.length > 80, `answer too short: ${m.name}`)
+  assert.ok(!/\$\s?\d/.test(m.acceptedAnswer.text), `price in answer: ${m.name}`)
+}
+console.log("check-schemas faq ok")
