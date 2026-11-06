@@ -6,6 +6,7 @@ import { ArrowRight, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import NavBar from "@/components/ui/NavBar"
 import { serviceCategories } from "@/data/serviceDetails"
+import { cityPages } from "@/data/cityPages"
 import { useDrawer } from "@/context/DrawerContext"
 import Link from "next/link"
 
@@ -31,7 +32,8 @@ export default function ServicesContent() {
           <h1 className="text-3xl sm:text-4xl xl:text-5xl font-medium mb-4">Our Services</h1>
           <p className="text-white/50 text-base xl:text-lg max-w-2xl">
             Everything we build is custom, full-service, and built to last.
-            No templates, no shortcuts.
+            No templates, no shortcuts. Based in Kitchener-Waterloo, working
+            with businesses across Waterloo Region and Guelph.
           </p>
         </div>
 
@@ -120,6 +122,41 @@ export default function ServicesContent() {
             </AnimatePresence>
           </div>
         </div>
+
+        <section className="mt-16 border-t border-white/10 pt-12 mb-20">
+          <h2 className="text-2xl xl:text-3xl font-medium mb-8">All services</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            {serviceCategories.flatMap((cat) =>
+              cat.tabs.map((t) => (
+                <div
+                  key={t.id}
+                  className="p-5 rounded-lg bg-white/[0.03] border border-white/5 hover:border-white/15 transition-all"
+                >
+                  <Link href={`/services/${t.id}`} className="group block">
+                    <h3 className="text-lg font-medium mb-1 group-hover:text-white">{t.title}</h3>
+                    <p className="text-white/40 text-sm">{t.headline}</p>
+                  </Link>
+                  {t.id === "custom-websites" && (
+                    <p className="text-white/40 text-xs mt-3">
+                      Also:{" "}
+                      {cityPages.map((c, i) => (
+                        <span key={c.slug}>
+                          {i > 0 && " · "}
+                          <Link
+                            href={`/web-design/${c.slug}`}
+                            className="text-white/60 hover:text-white transition-colors"
+                          >
+                            web design in {c.city}
+                          </Link>
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+        </section>
       </main>
     </div>
   )
