@@ -30,12 +30,14 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const service = getServiceBySlug(params.slug)
   if (!service) return {}
+  const title = service.seoTitle ?? `${service.title} in Kitchener-Waterloo`
+  const description = service.seoDescription ?? service.description
   return {
-    title: `${service.title} in Kitchener-Waterloo`,
-    description: service.description,
+    title,
+    description,
     openGraph: {
-      title: `${service.title} in Kitchener-Waterloo | Pontera Studios`,
-      description: service.description,
+      title: `${title} | Pontera Studios`,
+      description,
     },
     alternates: {
       canonical: `https://www.ponterastudios.com/services/${params.slug}`,

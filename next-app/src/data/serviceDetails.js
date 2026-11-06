@@ -5,6 +5,8 @@ export const serviceCategories = [
     tabs: [
       {
         id: "web-apps",
+        seoTitle: "Web App Development Kitchener-Waterloo",
+        seoDescription: "Custom web applications for Kitchener-Waterloo businesses: dashboards, portals and SaaS, built full-stack and handed over with the code.",
         title: "Web Application Development",
         headline: "Full-stack applications built from the ground up.",
         description:
@@ -18,6 +20,8 @@ export const serviceCategories = [
       },
       {
         id: "custom-websites",
+        seoTitle: "Web Design Kitchener-Waterloo",
+        seoDescription: "Custom-coded websites for Kitchener-Waterloo businesses. Fast, built to rank, and yours to own. No WordPress, no templates, no lock-in.",
         title: "Web Design & Development",
         headline: "Your business deserves more than a template.",
         description:
@@ -31,6 +35,8 @@ export const serviceCategories = [
       },
       {
         id: "landing-pages",
+        seoTitle: "Landing Page Design Kitchener-Waterloo",
+        seoDescription: "High-converting landing pages for launches, ads and lead generation. Fast turnaround, built from scratch in Kitchener-Waterloo.",
         title: "Landing Pages",
         headline: "Pages that convert visitors into customers.",
         description:
@@ -44,6 +50,8 @@ export const serviceCategories = [
       },
       {
         id: "seo",
+        seoTitle: "SEO Services Kitchener-Waterloo",
+        seoDescription: "Technical and local SEO for small businesses in Kitchener-Waterloo. Site speed, structure, Search Console and Google Business Profile.",
         title: "SEO Services for Small Business",
         headline: "Get found by the people who are looking for you.",
         description:
@@ -64,6 +72,8 @@ export const serviceCategories = [
     tabs: [
       {
         id: "ios",
+        seoTitle: "iOS App Development Kitchener-Waterloo",
+        seoDescription: "Native Swift iOS apps with the backend built by the same team. From wireframe to App Store, in Kitchener-Waterloo.",
         title: "iOS Development",
         headline: "Native iOS apps from concept to the App Store.",
         description:
@@ -83,6 +93,8 @@ export const serviceCategories = [
     tabs: [
       {
         id: "integrations",
+        seoTitle: "System Integrations Kitchener-Waterloo",
+        seoDescription: "Custom integrations that connect your CRM, email, payments and inventory so data moves without manual work.",
         title: "System Integrations",
         headline: "If it has an API, we can connect it.",
         description:
@@ -96,6 +108,8 @@ export const serviceCategories = [
       },
       {
         id: "automation",
+        seoTitle: "AI Workflow Automation Kitchener-Waterloo",
+        seoDescription: "Automate repetitive work with custom code, n8n, Zapier or AI workflows. Built for Kitchener-Waterloo businesses.",
         title: "Workflow Automation",
         headline: "Stop doing the same thing twice.",
         description:

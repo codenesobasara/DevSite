@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node --no-warnings scripts/check-seo-meta.mjs && node --no-warnings scripts/check-schemas.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
