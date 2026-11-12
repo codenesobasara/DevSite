@@ -12,7 +12,7 @@ function TrustStatement() {
           transition={{ duration: 0.6 }}
           className="text-6xl font-bold max-w-4xl pb-10"
         >
-          Software Solutions for Growing Businesses
+          Software Solutions for Growing Businesses in Kitchener-Waterloo
         </motion.h2>
 
         <motion.p
@@ -44,7 +44,7 @@ function TrustStatement() {
           transition={{ duration: 0.6 }}
           className="text-3xl font-bold"
         >
-          Software Solutions for Growing Businesses
+          Software Solutions for Growing Businesses in Kitchener-Waterloo
         </motion.h2>
 
         <motion.p

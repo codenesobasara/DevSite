@@ -2,19 +2,21 @@ import "./globals.css"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { DrawerProvider } from "@/context/DrawerContext"
 import ContactDrawer from "@/components/ContactDrawer"
+import JsonLd from "@/components/JsonLd"
+import { schemas } from "@/lib/schemas"
 
 export const metadata = {
   metadataBase: new URL("https://www.ponterastudios.com"),
   title: {
-    default: "Pontera Studios — Custom Software & Web Development",
+    default: "Web Design & Custom Software in Kitchener-Waterloo | Pontera Studios",
     template: "%s | Pontera Studios",
   },
   description:
-    "Custom software development and web development studio in the Waterloo Region, Ontario. Full-stack applications, websites, AI integration, and automation.",
+    "Custom web design and software development studio serving Kitchener, Waterloo, Cambridge and Guelph. Websites, full-stack applications, AI integration and automation, all coded from scratch.",
   openGraph: {
-    title: "Pontera Studios — Custom Software & Web Development",
+    title: "Web Design & Custom Software in Kitchener-Waterloo | Pontera Studios",
     description:
-      "Custom software development and web development studio in the Waterloo Region, Ontario.",
+      "Custom web design and software development studio serving Kitchener, Waterloo, Cambridge and Guelph.",
     type: "website",
     siteName: "Pontera Studios",
     locale: "en_CA",
@@ -42,6 +44,7 @@ export default function RootLayout({ children }) {
         <link rel="preload" as="font" type="font/woff2" href="/fonts/dm-sans-latin.woff2" crossOrigin="anonymous" />
       </head>
       <body>
+        <JsonLd data={schemas.localBusiness} />
         <DrawerProvider>
           {children}
           <ContactDrawer />
